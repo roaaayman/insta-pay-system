@@ -14,9 +14,9 @@ public class TransferToWallet implements ITransferStrategy{
         }
 
         // Check if the source account has sufficient balance
-        if (sourceAccount.getBalance() < amount) {
-            throw new IllegalStateException("Insufficient funds in the source account.");
-        }
+//        if (sourceAccount.getBalance() < amount) {
+//            throw new IllegalStateException("Insufficient funds in the source account.");
+//        }
 
         // Implement logic for transferring to different account types
         // You may need to interact with the wallet provider's API or update the account balances
