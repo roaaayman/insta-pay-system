@@ -5,6 +5,6 @@ public class InstapayAccountFactory implements AccountFactory{
     @Override
     public IAccount createAccount() {
 
-        return null;
+        return new InstapayAccount();
     }
 }

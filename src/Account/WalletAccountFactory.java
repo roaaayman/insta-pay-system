@@ -5,6 +5,6 @@ public class WalletAccountFactory implements AccountFactory{
     @Override
     public IAccount createAccount() {
 
-        return null;
+        return new WalletAccount();
     }
 }
