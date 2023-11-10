@@ -22,23 +22,32 @@ public class BankAccount implements IAccount{
 
     @Override
     public void transfer(IAccount destAcc, double amount) {
-        ITransferStrategy transferStrategy ;
+
+        IAccount srcAcc=new BankAccount();
+
+        deductAmount(amount);
         if(destAcc == new WalletAccount())
         {
-            transferStrategy=new TransferToWallet();
+            TransferToWallet transferToWallet=new TransferToWallet();
+            transferToWallet.transfer(srcAcc,destAcc,amount);
+
         }
         else if(destAcc == new InstapayAccount())
         {
-            transferStrategy=new TransferToInstapayAccount();
+            TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
+            transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
+
         }
         else if(destAcc==new BankAccount())
         {
-            transferStrategy=new TransferToBank();
+            TransferToBank transferToBank=new TransferToBank();
+            transferToBank.transfer(srcAcc,destAcc,amount);
         }
         else {
             System.out.println("Unsupported");
         }
-        deductAmount(amount);
+
+
 
     }
     public void deductAmount(double amount) {

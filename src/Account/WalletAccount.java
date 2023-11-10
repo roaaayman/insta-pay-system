@@ -1,6 +1,7 @@
 package Account;
 
 import Transferral.ITransferStrategy;
+import Transferral.TransferToBank;
 import Transferral.TransferToInstapayAccount;
 import Transferral.TransferToWallet;
 
@@ -22,19 +23,27 @@ public class WalletAccount implements IAccount{
 
     @Override
     public void transfer(IAccount destAcc, double amount) {
-        ITransferStrategy transferStrategy ;
+
+        IAccount srcAcc=new WalletAccount();
+
+        deductAmount(amount);
         if(destAcc == new WalletAccount())
         {
-            transferStrategy=new TransferToWallet();
+            TransferToWallet transferToWallet=new TransferToWallet();
+            transferToWallet.transfer(srcAcc,destAcc,amount);
+
         }
         else if(destAcc == new InstapayAccount())
         {
-            transferStrategy=new TransferToInstapayAccount();
+            TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
+            transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
+
         }
         else {
             System.out.println("Unsupported");
         }
-        deductAmount(amount);
+
+
 
     }
     public void deductAmount(double amount) {

@@ -36,20 +36,29 @@ public class InstapayAccount implements IAccount{
 
     }
 
+    @Override
     public void transfer(IAccount destAcc, double amount) {
-        ITransferStrategy transferStrategy ;
+
+        IAccount srcAcc=new InstapayAccount();
+
+        deductAmount(amount);
         if(destAcc == new WalletAccount())
         {
-            transferStrategy=new TransferToWallet();
+            TransferToWallet transferToWallet=new TransferToWallet();
+            transferToWallet.transfer(srcAcc,destAcc,amount);
+
         }
         else if(destAcc == new InstapayAccount())
         {
-            transferStrategy=new TransferToInstapayAccount();
+            TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
+            transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
+
         }
         else {
             System.out.println("Unsupported");
         }
-        deductAmount(amount);
+
+
 
     }
     public void deductAmount(double amount) {
