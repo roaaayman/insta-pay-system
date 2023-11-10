@@ -1,5 +1,5 @@
 package Account;
 
 public interface AccountFactory {
-    void createAccount();
+    IAccount createAccount();
 }
