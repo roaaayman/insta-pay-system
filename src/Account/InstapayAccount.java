@@ -42,13 +42,13 @@ public class InstapayAccount implements IAccount{
         IAccount srcAcc=new InstapayAccount();
 
         deductAmount(amount);
-        if(destAcc == new WalletAccount())
+        if(destAcc instanceof WalletAccount)
         {
             TransferToWallet transferToWallet=new TransferToWallet();
             transferToWallet.transfer(srcAcc,destAcc,amount);
 
         }
-        else if(destAcc == new InstapayAccount())
+        else if(destAcc instanceof  InstapayAccount)
         {
             TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
             transferToInstapayAccount.transfer(srcAcc,destAcc,amount);

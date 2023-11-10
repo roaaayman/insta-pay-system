@@ -26,19 +26,19 @@ public class BankAccount implements IAccount{
         IAccount srcAcc=new BankAccount();
 
         deductAmount(amount);
-        if(destAcc == new WalletAccount())
+        if(destAcc instanceof  WalletAccount)
         {
             TransferToWallet transferToWallet=new TransferToWallet();
             transferToWallet.transfer(srcAcc,destAcc,amount);
 
         }
-        else if(destAcc == new InstapayAccount())
+        else if(destAcc instanceof  InstapayAccount)
         {
             TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
             transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
 
         }
-        else if(destAcc==new BankAccount())
+        else if(destAcc instanceof  BankAccount)
         {
             TransferToBank transferToBank=new TransferToBank();
             transferToBank.transfer(srcAcc,destAcc,amount);
