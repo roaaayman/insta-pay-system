@@ -1,60 +1,31 @@
 package User;
 
-import Account.IAccount;
-
 public class WalletUser extends User {
-    private String username;
-    private String password;
     private String mobileNumber;
-    private IAccount account;
 
-    @Override
-    public String getUsername() {
-        return username;
+    public WalletUser(String username, String password, String mobileNumber) {
+        super(username, password);
+        this.mobileNumber = mobileNumber;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getMobileNumber() {
         return mobileNumber;
     }
 
     @Override
-    public IAccount getAccount() {
-        return account;
+    public void signUp() {
+        if (getUsername() == null) {
+            System.out.println("Signing up Wallet user...");
+            System.out.println("Mobile Number: " + mobileNumber);
+            System.out.println("Wallet user signed up successfully.");
+        } else {
+            System.out.println("Wallet user is already registered.");
+        }
     }
 
     @Override
-    void signUp(User user) {
-
+    public void displayAdditionalDetails() {
+        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("Account Type: Wallet");
     }
-
-
-    @Override
-    public void signIn(String username, String password) {
-        // Implement wallet user sign-in logic
-    }
-
-    @Override
-    public double inquireBalance() {
-        // Implement wallet user balance inquiry logic
-        return account.getBalance();
-    }
-
-    @Override
-    public void payBills() {
-        // Implement wallet user bill payment logic
-    }
-
-    @Override
-    public UserProfile viewProfile() {
-        return new UserProfile(username, mobileNumber);
-    }
-
-
-
 }
