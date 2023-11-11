@@ -1,54 +1,43 @@
 package User;
 
-import Account.IAccount;
+import java.util.Scanner;
 
 public abstract class User {
     private String username;
     private String password;
-    private String mobileNumber;
-    private IAccount account;
-    String getUsername()
-    {
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername() {
         return username;
     }
-    // Abstract method declarations
-    String getPassword()
-    {
+
+    public String getPassword() {
         return password;
     }
-    String getMobileNumber()
-    {
-        return mobileNumber;
-    }
-    IAccount getAccount()
-    {
-        return account;
-    }
-    abstract void signUp(User user);
 
-    void signIn(String username, String password)
-    {
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // Abstract sign-up method to be implemented by concrete subclasses
+    public abstract void signUp();
+
+    public void signIn(String username, String password) {
         if (this.username.equals(username) && this.password.equals(password)) {
-            System.out.println("Bank user authenticated successfully.");
+            System.out.println("User authenticated successfully.");
         } else {
             System.out.println("Authentication failed. Invalid username or password.");
         }
     }
-    double inquireBalance()
-    {
-        return account.getBalance();
-    }
-    void payBills()
-    {
-        // Implement utility bill payment for BankUser
-        System.out.println("BankUser paying bills.");
 
-        System.out.println("BAnk user payed successfully.");
-    }
-    UserProfile viewProfile()
-    {
-        return new UserProfile(username, mobileNumber);
-    }
-
-
+    // Abstract method for additional user-specific details
+    public abstract void displayAdditionalDetails();
 }
