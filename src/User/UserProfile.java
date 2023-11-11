@@ -1,11 +1,15 @@
 package User;
+
 public class UserProfile {
     private String username;
     private String mobileNumber;
 
+    public UserProfile(User user) {
+        this.username = user.getUsername();
+        this.mobileNumber = user.getMobileNumber();
+    }
+
     public UserProfile(String username, String mobileNumber) {
-        this.username = username;
-        this.mobileNumber = mobileNumber;
     }
 
     public String getUsername() {
@@ -14,5 +18,12 @@ public class UserProfile {
 
     public String getMobileNumber() {
         return mobileNumber;
+    }
+
+    public void displayAllDetails(User user) {
+        System.out.println("User Details:");
+        System.out.println("Username: " + user.getUsername());
+        System.out.println("Mobile Number: " + user.getMobileNumber());
+        user.displayAdditionalDetails(); // This method should be implemented in WalletUser and BankUser
     }
 }
