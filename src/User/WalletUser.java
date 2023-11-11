@@ -2,7 +2,7 @@ package User;
 
 import Account.IAccount;
 
-public class WalletUser implements User {
+public class WalletUser extends User {
     private String username;
     private String password;
     private String mobileNumber;
@@ -29,14 +29,10 @@ public class WalletUser implements User {
     }
 
     @Override
-    public void signUp(String username, String password, String mobileNumber, IAccount account) {
-        // Implement wallet user sign-up logic
-        this.username = username;
-        this.password = password;
-        this.mobileNumber = mobileNumber;
-        this.account = account;
-        System.out.println("Wallet user registered successfully.");
+    void signUp(User user) {
+
     }
+
 
     @Override
     public void signIn(String username, String password) {
