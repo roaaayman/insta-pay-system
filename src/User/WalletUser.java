@@ -1,60 +1,65 @@
 package User;
 
-import Account.IAccount;
+import Bill.IBill;
+import VerificationService.BankVerification;
+import VerificationService.IVerification;
+import VerificationService.WalletVerification;
+
+import java.util.Scanner;
 
 public class WalletUser extends User {
-    private String username;
-    private String password;
     private String mobileNumber;
-    private IAccount account;
 
-    @Override
-    public String getUsername() {
-        return username;
+
+    public WalletUser(String username, String password, String mobileNumber) {
+        super(username, password);
+        this.mobileNumber = mobileNumber;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getMobileNumber() {
         return mobileNumber;
     }
 
     @Override
-    public IAccount getAccount() {
-        return account;
+    public void signUp() {
+        if (getUsername() == null) {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Signing up Wallet user...");
+
+            // Prompt the user for username
+            System.out.print("Enter Username: ");
+            String username = scanner.nextLine();
+
+            // Prompt the user for password
+            System.out.print("Enter Password: ");
+            String password = scanner.nextLine();
+
+            // Prompt the user for the mobile number
+            System.out.print("Enter Mobile Number: ");
+            mobileNumber = scanner.nextLine();
+
+            setUsername(username);
+            setPassword(password);
+
+            System.out.println("Username: " + getUsername());
+            System.out.println("Password: " + getPassword());
+            System.out.println("Mobile Number: " + mobileNumber);
+            WalletVerification bankv=new WalletVerification();
+            boolean verified = bankv.verifyOTP(mobileNumber);
+            if (verified) {
+                System.out.println("Wallet user signed up successfully.");
+            } else {
+                System.out.println("OTP verification failed. Bank user not signed up.");
+            }
+
+
+            // Close the scanner
+            scanner.close();
+        } else {
+            System.out.println("Wallet user is already registered.");
+        }
     }
-
-    @Override
-    void signUp(User user) {
-
-    }
-
-
-    @Override
-    public void signIn(String username, String password) {
-        // Implement wallet user sign-in logic
-    }
-
-    @Override
-    public double inquireBalance() {
-        // Implement wallet user balance inquiry logic
-        return account.getBalance();
-    }
-
-    @Override
-    public void payBills() {
-        // Implement wallet user bill payment logic
-    }
-
-    @Override
-    public UserProfile viewProfile() {
-        return new UserProfile(username, mobileNumber);
-    }
-
 
 
 }

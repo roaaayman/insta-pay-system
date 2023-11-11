@@ -13,9 +13,9 @@ public class TransferToInstapayAccount implements ITransferStrategy {
         }
 
         // Check if the source account has sufficient balance
-//        if (sourceAccount.getBalance() < amount) {
-//            throw new IllegalStateException("Insufficient funds in the source account.");
-//        }
+        if (sourceAccount.getBalance() < amount) {
+            throw new IllegalStateException("Insufficient funds in the source account.");
+        }
 
         // Implement logic for transferring to another Instapay account
         // You may need to update the account balances
