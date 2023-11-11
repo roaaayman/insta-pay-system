@@ -75,4 +75,9 @@ public class BankUser extends User {
             System.out.println("Bank user is already registered.");
         }
     }
+    @Override
+    public void payBill(IBill bill) {
+        // Implement bill payment logic for bank user
+        bill.payBill(this);
+    }
 }
