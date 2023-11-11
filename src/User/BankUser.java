@@ -1,63 +1,37 @@
 package User;
 
+import Account.BankAccount;
 import Account.IAccount;
 
 public class BankUser extends User {
-    private String username;
-    private String password;
-    private String mobileNumber;
-    private IAccount account;
+    private String bankName;
+    private BankAccount bankAccount;
 
-    @Override
-    public String getUsername() {
-        return username;
+    public BankUser(String username, String password,  String bankName, BankAccount bankAccount) {
+        super(username, password);
+        this.bankName = bankName;
+        this.bankAccount = bankAccount;
+    }
+
+    public String getBankName() {
+        return bankName;
     }
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    @Override
-    public IAccount getAccount() {
-        return account;
-    }
-
-    @Override
-    public void signUp(User user) {
-
-    }
-
-
-    @Override
-    public void signIn(String username, String password) {
-        if (this.username.equals(username) && this.password.equals(password)) {
-            System.out.println("Bank user authenticated successfully.");
+    public void signUp() {
+        if (getUsername() == null) {
+            System.out.println("Signing up Bank user...");
+            System.out.println("Bank Name: " + bankName);
+            System.out.println("Bank Account: " + bankAccount);
+            System.out.println("Bank user signed up successfully.");
         } else {
-            System.out.println("Authentication failed. Invalid username or password.");
+            System.out.println("Bank user is already registered.");
         }
     }
 
     @Override
-    public double inquireBalance() {
-        return account.getBalance();
+    public void displayAdditionalDetails() {
+        System.out.println("Bank Name: " + bankName);
+        System.out.println("Account Type: Bank");
     }
-
-    @Override
-    public void payBills() {
-        // Implement utility bill payment for BankUser
-        System.out.println("BankUser paying bills.");
-    }
-
-    @Override
-    public UserProfile viewProfile() {
-        return new UserProfile(username, mobileNumber);
-    }
-
-
 }
