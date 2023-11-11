@@ -48,5 +48,17 @@ public class WalletUser extends User {
         }
     }
 
+    @Override
+    public void signIn(String username, String password) {
+        super.signIn(username, password);
+        viewProfile();
+    }
 
+    public void viewProfile() {
+        System.out.println("User Profile:");
+        System.out.println("Username: " + getUsername());
+        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("Account type: wallet");
+
+    }
 }

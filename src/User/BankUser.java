@@ -65,4 +65,17 @@ public class BankUser extends User {
             System.out.println("Bank user is already registered.");
         }
     }
+    @Override
+    public void signIn(String username, String password) {
+        super.signIn(username, password);
+        viewProfile();
+    }
+    public void viewProfile() {
+        System.out.println("User Profile:");
+        System.out.println("Username: " + getUsername());
+        System.out.println("Bank Name: " + bankName);
+        System.out.println("Bank Account: " + bankAccount);
+        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("Account type: Bank user");
+    }
 }
