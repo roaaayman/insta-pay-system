@@ -12,7 +12,7 @@ public class GasBill implements IBill{
 
     @Override
     public void payBill(User user) {
-        System.out.println("Paying Gas bill for user: " + user.getUsername() + " - Amount: " + amount);
-        // Implement the logic to deduct the bill amount from the user's account
+        System.out.println("Paying Gas Bill of $" + amount + " for user: " + user.getUsername());
+        user.getAccount().deductAmount(amount);
     }
 }

@@ -12,8 +12,7 @@ public class WaterBill implements IBill{
 
     @Override
     public void payBill(User user) {
-        // Implement water bill payment logic
-        System.out.println("Paying Water Bill of $" + amount + " for user: " + user.getUsername());
-        // Implement deduction from user's account balance or any other logic
+        System.out.println("Paying Electricity Bill of $" + amount + " for user: " + user.getUsername());
+        user.getAccount().deductAmount(amount);
     }
 }

@@ -15,10 +15,7 @@ public class BankAccount implements IAccount{
     public void setBalance(double b) {
         balance=b;
     }
-    @Override
-    public void createAccount() {
 
-    }
 
     @Override
     public void transfer(IAccount destAcc, double amount) {
@@ -55,7 +52,7 @@ public class BankAccount implements IAccount{
             balance -= amount;
             System.out.println("Deduction successful. Remaining balance: " + balance);
         } else {
-            System.out.println("Insufficient funds for the transfer.");
+            System.out.println("Insufficient funds in account.");
         }
     }
 }
