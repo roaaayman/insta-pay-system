@@ -1,10 +1,9 @@
 package WalletUserData;
-
 import User.WalletUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerWalletProvider {
+public class CustomerWalletProvider implements WalletProvider{
     private String providerName;
     private List<WalletUser> walletUsers;
 
