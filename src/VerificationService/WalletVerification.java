@@ -14,7 +14,6 @@ public class WalletVerification implements IVerification{
     @Override
     public boolean verifyOTP(String mobileNum) {
         int generatedOTP = sendOTP();
-        System.out.println(generatedOTP);
 
         System.out.println("YOUR OTP IS: "+generatedOTP);
 

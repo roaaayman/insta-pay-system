@@ -69,8 +69,7 @@ public class BankUser extends User {
                 System.out.println("OTP verification failed. Bank user not signed up.");
             }
 
-            // Close the scanner
-            scanner.close();
+
         } else {
             System.out.println("Bank user is already registered.");
         }
