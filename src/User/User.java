@@ -1,43 +1,54 @@
 package User;
 
-import java.util.Scanner;
+import Account.IAccount;
 
 public abstract class User {
     private String username;
     private String password;
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    public String getUsername() {
+    private String mobileNumber;
+    private IAccount account;
+    String getUsername()
+    {
         return username;
     }
-
-    public String getPassword() {
+    // Abstract method declarations
+    String getPassword()
+    {
         return password;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
+    String getMobileNumber()
+    {
+        return mobileNumber;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
+    IAccount getAccount()
+    {
+        return account;
     }
+    abstract void signUp(User user);
 
-    // Abstract sign-up method to be implemented by concrete subclasses
-    public abstract void signUp();
-
-    public void signIn(String username, String password) {
+    void signIn(String username, String password)
+    {
         if (this.username.equals(username) && this.password.equals(password)) {
-            System.out.println("User authenticated successfully.");
+            System.out.println("Bank user authenticated successfully.");
         } else {
             System.out.println("Authentication failed. Invalid username or password.");
         }
     }
+    double inquireBalance()
+    {
+        return account.getBalance();
+    }
+    void payBills()
+    {
+        // Implement utility bill payment for BankUser
+        System.out.println("BankUser paying bills.");
 
-    // Abstract method for additional user-specific details
-    public abstract void displayAdditionalDetails();
+        System.out.println("BAnk user payed successfully.");
+    }
+    UserProfile viewProfile()
+    {
+        return new UserProfile(username, mobileNumber);
+    }
+
+
 }
