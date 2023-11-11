@@ -62,9 +62,5 @@ public class BankUser implements User {
         return new UserProfile(username, mobileNumber);
     }
 
-    @Override
-    public void displayAdditionalDetails() {
-        System.out.println("Account Type: Bank");
-        // Include any additional details specific to BankUser here
-    }
+
 }
