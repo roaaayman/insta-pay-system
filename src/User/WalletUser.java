@@ -60,6 +60,11 @@ public class WalletUser extends User {
             System.out.println("Wallet user is already registered.");
         }
     }
+    @Override
+    public void payBill(IBill bill) {
+        // Implement bill payment logic for wallet user
+        bill.payBill(this);
+    }
 
 
 }
