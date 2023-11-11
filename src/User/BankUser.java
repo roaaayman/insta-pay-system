@@ -1,13 +1,12 @@
 package User;
 
 import Account.BankAccount;
-import Account.IAccount;
 
 public class BankUser extends User {
     private String bankName;
     private BankAccount bankAccount;
 
-    public BankUser(String username, String password,  String bankName, BankAccount bankAccount) {
+    public BankUser(String username, String password, String bankName, String bankAccount) {
         super(username, password);
         this.bankName = bankName;
         this.bankAccount = bankAccount;
