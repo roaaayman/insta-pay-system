@@ -1,5 +1,6 @@
 package User;
 
+import Account.IAccount;
 import Bill.IBill;
 import VerificationService.BankVerification;
 import VerificationService.IVerification;
@@ -11,8 +12,8 @@ public class WalletUser extends User {
     private String mobileNumber;
 
 
-    public WalletUser(String username, String password, String mobileNumber) {
-        super(username, password);
+    public WalletUser(String username, String password, String mobileNumber, IAccount Account) {
+        super(username, password,Account);
         this.mobileNumber = mobileNumber;
     }
 
@@ -59,6 +60,11 @@ public class WalletUser extends User {
         } else {
             System.out.println("Wallet user is already registered.");
         }
+    }
+    @Override
+    public void payBill(IBill bill) {
+        // Implement bill payment logic for wallet user
+        bill.payBill(this);
     }
 
 

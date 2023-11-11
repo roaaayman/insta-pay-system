@@ -14,6 +14,6 @@ public class ElectricityBill implements IBill{
     @Override
     public void payBill(User user) {
         System.out.println("Paying Electricity Bill of $" + amount + " for user: " + user.getUsername());
-
+        user.getAccount().deductAmount(amount);
     }
 }

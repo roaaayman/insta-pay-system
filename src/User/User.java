@@ -1,16 +1,20 @@
 package User;
 
+import Account.IAccount;
 import Bill.IBill;
 
 import java.util.Scanner;
 
 public abstract class User {
+    private IAccount account;
+
     private String username;
     private String password;
 
-    public User(String username, String password) {
+    public User(String username, String password,IAccount account) {
         this.username = username;
         this.password = password;
+        this.account=account;
     }
 
     public String getUsername() {
@@ -40,6 +44,10 @@ public abstract class User {
         }
     }
 
+    public abstract void payBill(IBill bill);
+    public IAccount getAccount() {
+        return account;
+    }
 
 
 
