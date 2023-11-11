@@ -55,4 +55,11 @@ public class BankAccount implements IAccount{
             System.out.println("Insufficient funds in account.");
         }
     }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited $" + amount + " into Bank Account. New balance: $" + balance);
+    }
+
 }
