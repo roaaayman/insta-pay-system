@@ -28,7 +28,7 @@ public class BankUser implements User {
         return account;
     }
 
-
+    @Override
     public void signUp(String username, String password, String mobileNumber, IAccount account) {
         this.username = username;
         this.password = password;

@@ -28,6 +28,7 @@ public class WalletUser implements User {
         return account;
     }
 
+    @Override
     public void signUp(String username, String password, String mobileNumber, IAccount account) {
         // Implement wallet user sign-up logic
         this.username = username;

@@ -7,7 +7,7 @@ public interface User {
     String getPassword();
     String getMobileNumber();
     IAccount getAccount();
-   // void signUp(String username, String password, String mobileNumber, IAccount account);
+    void signUp(String username, String password, String mobileNumber, IAccount account);
     void signIn(String username, String password);
     double inquireBalance();
     void payBills();
