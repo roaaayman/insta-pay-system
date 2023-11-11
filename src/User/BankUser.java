@@ -1,5 +1,7 @@
 package User;
 
+import VerificationService.BankVerification;
+
 import java.util.Scanner;
 
 public class BankUser extends User {
@@ -57,7 +59,16 @@ public class BankUser extends User {
             System.out.println("Bank Name: " + bankName);
             System.out.println("Bank Account: " + bankAccount);
             System.out.println("Mobile Number: " + mobileNumber);
-            System.out.println("Bank user signed up successfully.");
+
+            // Call the OTP verification
+            BankVerification bankVerification = new BankVerification();
+            boolean verified = bankVerification.verifyOTP(mobileNumber);
+
+            if (verified) {
+                System.out.println("Bank user signed up successfully.");
+            } else {
+                System.out.println("OTP verification failed. Bank user not signed up.");
+            }
 
             // Close the scanner
             scanner.close();
@@ -65,6 +76,7 @@ public class BankUser extends User {
             System.out.println("Bank user is already registered.");
         }
     }
+
     @Override
     public void signIn(String username, String password) {
         super.signIn(username, password);
