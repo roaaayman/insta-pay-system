@@ -8,12 +8,7 @@ public class user {
     private static String mobileNumber;
     private IAccount account; // This represents the user's account (either BankAccount or WalletAccount)
 
-    public user(String username, String password, String mobileNumber, IAccount account) {
-        this.username = username;
-        this.password = password;
-        this.mobileNumber = mobileNumber;
-        this.account = account;
-    }
+
 
     public static String getUsername() {
         return username;
