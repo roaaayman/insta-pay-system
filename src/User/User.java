@@ -42,6 +42,8 @@ public abstract class User {
     {
         // Implement utility bill payment for BankUser
         System.out.println("BankUser paying bills.");
+
+        System.out.println("BAnk user payed successfully.");
     }
     UserProfile viewProfile()
     {
