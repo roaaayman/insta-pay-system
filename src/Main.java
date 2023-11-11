@@ -1,5 +1,8 @@
 import Account.*;
 import User.user;
+import VerificationService.BankVerification;
+import VerificationService.IVerification;
+import VerificationService.WalletVerification;
 
 import java.util.Scanner;
 
@@ -8,7 +11,8 @@ public class Main {
     public static void main(String[] args) {
         AccountFactory bank=new BankAccountFactory();
         AccountFactory wallet=new WalletAccountFactory();
-        AccountFactory instapay=new InstapayAccountFactory();
+        IVerification bankv=new BankVerification();
+        IVerification walletv=new WalletVerification();
         user user = new user();
 
         Scanner scanner = new Scanner(System.in);
@@ -26,8 +30,7 @@ public class Main {
             password= scanner.nextLine();
             System.out.println("Enter your mobile number");
             mobileNum= scanner.nextLine();
-            IAccount instapayAccount=instapay.createAccount();
-            user.signUp(username,password,mobileNum,instapayAccount);
+
 
             System.out.print("Select account type (bank/wallet): ");
             String accountType = scanner.nextLine();
@@ -35,6 +38,9 @@ public class Main {
             if(accountType.equals("bank")) {
                 IAccount bankAccount=bank.createAccount();
                 user.signUp(username,password,mobileNum,bankAccount);
+                System.out.println("sending OTP...");
+                System.out.println(bankv.sendOTP());
+                bankv.verifyOTP(mobileNum);
             }
             else if(accountType.equals("wallet"))
             {

@@ -14,12 +14,16 @@ public class BankVerification implements IVerification {
     public boolean verifyOTP(String mobileNum) {
         int generatedOTP = sendOTP();
 
-        // Simulate user entering OTP (you can replace this with actual user input)
+
         System.out.print("Enter OTP sent to your mobile number: ");
         Scanner scanner = new Scanner(System.in);
         int userEnteredOTP = scanner.nextInt();
 
-        // Verify OTP
+        if (generatedOTP == userEnteredOTP) {
+            System.out.println("System registered successfully");
+        } else {
+            System.out.println("OTP is wrong");
+        }
         return generatedOTP == userEnteredOTP;
     }
 }
