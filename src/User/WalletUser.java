@@ -48,9 +48,5 @@ public class WalletUser extends User {
         }
     }
 
-    @Override
-    public void displayAdditionalDetails() {
-        System.out.println("Mobile Number: " + mobileNumber);
-        System.out.println("Account Type: Wallet");
-    }
+
 }
