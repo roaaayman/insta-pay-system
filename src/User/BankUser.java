@@ -4,7 +4,7 @@ import Account.BankAccount;
 
 public class BankUser extends User {
     private String bankName;
-    private BankAccount bankAccount;
+    private String bankAccount;
 
     public BankUser(String username, String password, String bankName, String bankAccount) {
         super(username, password);
