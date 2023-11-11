@@ -1,5 +1,7 @@
 package User;
 
+import Bill.IBill;
+
 import java.util.Scanner;
 
 public abstract class User {
@@ -37,6 +39,7 @@ public abstract class User {
             System.out.println("Authentication failed. Invalid username or password.");
         }
     }
+
 
 
 

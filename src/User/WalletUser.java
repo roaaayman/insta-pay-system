@@ -1,9 +1,15 @@
 package User;
 
+import Bill.IBill;
+import VerificationService.BankVerification;
+import VerificationService.IVerification;
+import VerificationService.WalletVerification;
+
 import java.util.Scanner;
 
 public class WalletUser extends User {
     private String mobileNumber;
+
 
     public WalletUser(String username, String password, String mobileNumber) {
         super(username, password);
@@ -39,7 +45,14 @@ public class WalletUser extends User {
             System.out.println("Username: " + getUsername());
             System.out.println("Password: " + getPassword());
             System.out.println("Mobile Number: " + mobileNumber);
-            System.out.println("Wallet user signed up successfully.");
+            WalletVerification bankv=new WalletVerification();
+            boolean verified = bankv.verifyOTP(mobileNumber);
+            if (verified) {
+                System.out.println("Wallet user signed up successfully.");
+            } else {
+                System.out.println("OTP verification failed. Bank user not signed up.");
+            }
+
 
             // Close the scanner
             scanner.close();

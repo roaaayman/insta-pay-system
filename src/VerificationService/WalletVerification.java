@@ -13,6 +13,7 @@ public class WalletVerification implements IVerification{
     @Override
     public boolean verifyOTP(String mobileNum) {
         int generatedOTP = sendOTP();
+        System.out.println(generatedOTP);
 
         // Simulate user entering OTP (you can replace this with actual user input)
         System.out.print("Enter OTP sent to your mobile number: ");
