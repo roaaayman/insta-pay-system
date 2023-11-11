@@ -38,6 +38,5 @@ public abstract class User {
         }
     }
 
-    // Abstract method for additional user-specific details
-    public abstract void displayAdditionalDetails();
+
 }

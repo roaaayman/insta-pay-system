@@ -6,7 +6,7 @@ public class BankUser extends User {
     private String bankName;
     private String bankAccount;
 
-    public BankUser(String username, String password, String bankName) {
+    public BankUser(String username, String password, String bankName, String bankAccount) {
         super(username, password);
         this.bankName = bankName;
         this.bankAccount = null;
@@ -55,9 +55,5 @@ public class BankUser extends User {
         }
     }
 
-    @Override
-    public void displayAdditionalDetails() {
-        System.out.println("Bank Name: " + bankName);
-        System.out.println("Account Type: Bank");
-    }
+
 }
