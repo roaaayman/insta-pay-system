@@ -5,15 +5,21 @@ import java.util.Scanner;
 public class BankUser extends User {
     private String bankName;
     private String bankAccount;
+    private String mobileNumber;
 
-    public BankUser(String username, String password, String bankName) {
+    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber) {
         super(username, password);
         this.bankName = bankName;
-        this.bankAccount = null;
+        this.bankAccount = bankAccount;
+        this.mobileNumber = mobileNumber;
     }
 
     public String getBankName() {
         return bankName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
     }
 
     @Override
@@ -39,6 +45,10 @@ public class BankUser extends User {
             System.out.print("Enter Bank Account (as a string): ");
             bankAccount = scanner.nextLine();
 
+            // Prompt the user for the mobile number
+            System.out.print("Enter Mobile Number: ");
+            mobileNumber = scanner.nextLine();
+
             setUsername(username);
             setPassword(password);
 
@@ -46,6 +56,7 @@ public class BankUser extends User {
             System.out.println("Password: " + getPassword());
             System.out.println("Bank Name: " + bankName);
             System.out.println("Bank Account: " + bankAccount);
+            System.out.println("Mobile Number: " + mobileNumber);
             System.out.println("Bank user signed up successfully.");
 
             // Close the scanner
@@ -53,11 +64,5 @@ public class BankUser extends User {
         } else {
             System.out.println("Bank user is already registered.");
         }
-    }
-
-    @Override
-    public void displayAdditionalDetails() {
-        System.out.println("Bank Name: " + bankName);
-        System.out.println("Account Type: Bank");
     }
 }
