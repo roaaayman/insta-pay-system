@@ -17,6 +17,10 @@ public class WalletUser extends User {
         this.mobileNumber = mobileNumber;
     }
 
+    public double getBalance(){
+        return getAccount().getBalance();
+    }
+
     public String getMobileNumber() {
         return mobileNumber;
     }

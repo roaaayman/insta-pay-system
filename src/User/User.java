@@ -55,6 +55,9 @@ public abstract class User {
         // Close the scanner
 
     }
+    public double getBalance(){
+        return account.getBalance();
+    }
 
 
 

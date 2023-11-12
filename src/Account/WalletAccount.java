@@ -18,7 +18,7 @@ public class WalletAccount implements IAccount{
     }
 
     @Override
-    public void transfer(IAccount destAcc, double amount) {
+    public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
 
         IAccount srcAcc=new WalletAccount();
 
@@ -26,13 +26,13 @@ public class WalletAccount implements IAccount{
         if(destAcc instanceof  WalletAccount)
         {
             TransferToWallet transferToWallet=new TransferToWallet();
-            transferToWallet.transfer(srcAcc,destAcc,amount);
+            transferToWallet.transfer(srcAcc,destAcc,amount,destAccountNumber);
 
         }
         else if(destAcc instanceof  InstapayAccount)
         {
             TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
-            transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
+            transferToInstapayAccount.transfer(srcAcc,destAcc,amount,destAccountNumber);
 
         }
         else {
