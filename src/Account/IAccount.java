@@ -6,4 +6,9 @@ public interface IAccount {
     void transfer(IAccount destAcc, double amount,String destAccountNumber);
     void deductAmount(double amount);
     void deposit(double amount);
+
+
+    String getAccountType();
+
+    void displayAccountDetails();
 }
