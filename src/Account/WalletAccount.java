@@ -58,4 +58,12 @@ public class WalletAccount implements IAccount{
                 "Wallet Account. New balance: $" + balance);
     }
 
+    public String getAccountType() {
+        return "Wallet Account";
+    }
+    public void displayAccountDetails() {
+        System.out.println("Account Type: " + getAccountType());
+        System.out.println("Balance: $" + getBalance());
+
+    }
 }

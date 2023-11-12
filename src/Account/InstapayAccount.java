@@ -69,6 +69,15 @@ public class InstapayAccount implements IAccount{
         balance += amount;
         System.out.println("Deposited $" + amount + " into  Account. New balance: $" + balance);
     }
+    public String getAccountType() {
+        return "insta pay Account";
+    }
 
+    @Override
+    public void displayAccountDetails() {
+        System.out.println("Account Type: " + getAccountType());
+        System.out.println("Balance: $" + getBalance());
+
+    }
 }
 

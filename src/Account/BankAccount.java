@@ -61,5 +61,12 @@ public class BankAccount implements IAccount{
         balance += amount;
         System.out.println("Deposited $" + amount + " into Bank Account. New balance: $" + balance);
     }
+    public String getAccountType() {
+        return "Bank Account";
+    }
+    public void displayAccountDetails() {
+        System.out.println("Account Type: " + getAccountType());
+        System.out.println("Balance: $" + getBalance());
 
+    }
 }

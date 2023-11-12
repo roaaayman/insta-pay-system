@@ -6,7 +6,7 @@ import Bill.IBill;
 import java.util.Scanner;
 
 public abstract class User {
-    private IAccount account;
+    private final IAccount account;
 
     private String username;
     private String password;
@@ -35,6 +35,13 @@ public abstract class User {
 
     // Abstract sign-up method to be implemented by concrete subclasses
     public abstract void signUp();
+    //display profile function
+    public void displayProfile() {
+        System.out.println("User Profile:");
+        System.out.println("Username: " + username);
+        // Add more information as needed
+        account.displayAccountDetails();
+    }
 
     public void signIn() {
         Scanner scanner = new Scanner(System.in);
@@ -48,6 +55,8 @@ public abstract class User {
         // Perform the sign-in logic here, for example:
         if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
             System.out.println("User authenticated successfully.");
+            // Display user profile after successful sign-in
+            displayProfile();
         } else {
             System.out.println("Authentication failed. Invalid username or password.");
         }
