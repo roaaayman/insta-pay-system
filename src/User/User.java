@@ -11,10 +11,14 @@ public abstract class User {
     private String username;
     private String password;
 
-    public User(String username, String password,IAccount account) {
+    // Add instance variables for enteredUsername and enteredPassword
+    private String enteredUsername;
+    private String enteredPassword;
+
+    public User(String username, String password, IAccount account) {
         this.username = username;
         this.password = password;
-        this.account=account;
+        this.account = account;
     }
 
     public String getUsername() {
@@ -35,7 +39,8 @@ public abstract class User {
 
     // Abstract sign-up method to be implemented by concrete subclasses
     public abstract void signUp();
-    //display profile function
+
+    // Display profile function
     public void displayProfile() {
         System.out.println("User Profile:");
         System.out.println("Username: " + username);
@@ -47,10 +52,10 @@ public abstract class User {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your username: ");
-        String enteredUsername = scanner.nextLine();
+        enteredUsername = scanner.nextLine();
 
         System.out.print("Enter your password: ");
-        String enteredPassword = scanner.nextLine();
+        enteredPassword = scanner.nextLine();
 
         // Perform the sign-in logic here, for example:
         if (enteredUsername.equals(username) && enteredPassword.equals(password)) {
@@ -59,22 +64,25 @@ public abstract class User {
             displayProfile();
         } else {
             System.out.println("Authentication failed. Invalid username or password.");
+            return; // Return without proceeding to the inner menu
         }
 
         // Close the scanner
-
     }
-    public double getBalance(){
+
+    public double getBalance() {
         return account.getBalance();
     }
 
-
-
     public abstract void payBill(IBill bill);
+
     public IAccount getAccount() {
         return account;
     }
 
-
-
+    // Implementation of isAuthenticated
+    public boolean isAuthenticated() {
+        // Use the enteredUsername and enteredPassword variables here
+        return enteredUsername.equals(username) && enteredPassword.equals(password);
+    }
 }
