@@ -1,3 +1,6 @@
+import Account.BankAccount;
+import Account.IAccount;
+import Account.WalletAccount;
 import User.BankUser;
 import User.WalletUser;
 
@@ -7,6 +10,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        IAccount w=new WalletAccount();
+        IAccount b=new BankAccount();
 
         boolean exit = false;
         BankUser bankUser = null;
@@ -28,7 +33,7 @@ public class Main {
 
                 switch (choice) {
                     case 1:
-                        bankUser = new BankUser(null, null, null, null, null);
+                        bankUser = new BankUser(null, null, null, null, null,b);
                         System.out.println("Bank User Sign-Up:");
                         bankUser.signUp();
                         break;
@@ -41,7 +46,7 @@ public class Main {
                         }
                         break;
                     case 3:
-                        walletUser = new WalletUser(null, null, null);
+                        walletUser = new WalletUser(null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
                         walletUser.signUp();
                         break;
@@ -68,4 +73,5 @@ public class Main {
         // Close the scanner
         scanner.close();
     }
+
 }

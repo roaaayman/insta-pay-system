@@ -5,4 +5,5 @@ public interface IAccount {
     void setBalance(double b);
     void transfer(IAccount destAcc, double amount);
     void deductAmount(double amount);
+    void deposit(double amount);
 }
