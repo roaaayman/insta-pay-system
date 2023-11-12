@@ -60,7 +60,37 @@ public class Main {
                                     System.out.print("Enter your choice: ");
                                     int bankChoice = scanner.nextInt();
                                     switch (bankChoice) {
-                                        // ... (existing code)
+                                        case 1:
+                                            System.out.println("Enter the amount you want to transfer");
+                                            amountToBeTransferred=scanner.nextInt();
+                                            scanner.nextLine();
+                                            System.out.println("Enter the wallet account number you want to transfer to");
+                                            destinationAccountNumber=scanner.nextLine();
+                                            b.transfer(w,amountToBeTransferred,destinationAccountNumber);
+                                            break;
+                                        case 2:
+                                            System.out.println("Enter the amount you want to transfer");
+                                            amountToBeTransferred=scanner.nextInt();
+                                            System.out.println("Enter the wallet account number you want to transfer to");
+                                            destinationAccountNumber=scanner.nextLine();
+                                            b.transfer(b,amountToBeTransferred,destinationAccountNumber);
+                                            break;
+                                        case 3:
+                                            System.out.println("Enter the amount you want to transfer");
+                                            amountToBeTransferred=scanner.nextInt();
+                                            System.out.println("Enter the wallet account number you want to transfer to");
+                                            destinationAccountNumber=scanner.nextLine();
+                                            b.transfer(i,amountToBeTransferred,destinationAccountNumber);
+                                            break;
+                                        case 4:
+                                            System.out.println("Enter the amount you want to deposit");
+                                            amountToBeDeposited=scanner.nextInt();
+                                            b.deposit(amountToBeDeposited);
+                                            System.out.println("your new balance is $ "+bankUser.getBalance());
+                                            break;
+                                        case 5:
+                                            System.out.println("Your current account balance is $ "+ bankUser.getBalance());
+                                            break;
                                     }
                                 }
                             } else {
@@ -93,7 +123,26 @@ public class Main {
                                     System.out.print("Enter your choice: ");
                                     int walletChoice = scanner.nextInt();
                                     switch (walletChoice) {
-                                        // ... (existing code)
+                                        case 1:
+                                            System.out.println("Enter the amount you want to transfer");
+                                            amountToBeTransferred=scanner.nextInt();
+                                            scanner.nextLine();
+                                            System.out.println("Enter the wallet account number you want to transfer to");
+                                            destinationAccountNumber=scanner.nextLine();
+                                            w.transfer(w,amountToBeTransferred,destinationAccountNumber);
+                                            break;
+                                        case 2:
+                                            //
+                                            break;
+                                        case 3:
+                                            System.out.println("Enter the amount you want to deposit");
+                                            amountToBeDeposited=scanner.nextInt();
+                                            w.deposit(amountToBeDeposited);
+                                            System.out.println("your new balance is $ "+walletUser.getBalance());
+                                            break;
+                                        case 4:
+                                            System.out.println("Your current account balance is $ "+ walletUser.getBalance());
+                                            break;
                                     }
                                 }
                             } else {
