@@ -6,7 +6,7 @@ import Account.WalletAccount;
 
 public class TransferToWallet implements ITransferStrategy{
     @Override
-    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount) {
+    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate source account and destination account types
         if (!(sourceAccount instanceof WalletAccount) ||
                 !(destinationAccount instanceof WalletAccount || destinationAccount instanceof InstapayAccount)) {
@@ -20,7 +20,7 @@ public class TransferToWallet implements ITransferStrategy{
 
         // Implement logic for transferring to different account types
         // You may need to interact with the wallet provider's API or update the account balances
-        System.out.println("Transferring " + amount + " from Wallet account to another account type.");
+        System.out.println("Transferring " + amount + " to wallet account with number: "+destAccountNumber);
 
     }
 }

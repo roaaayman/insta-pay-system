@@ -6,7 +6,7 @@ import Account.InstapayAccount;
 
 public class TransferToInstapayAccount implements ITransferStrategy {
     @Override
-    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount) {
+    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate destination account type
         if (!(destinationAccount instanceof InstapayAccount)) {
             throw new IllegalArgumentException("Invalid account type for this transfer strategy.");

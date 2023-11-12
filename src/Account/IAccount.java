@@ -3,7 +3,7 @@ package Account;
 public interface IAccount {
     double getBalance();
     void setBalance(double b);
-    void transfer(IAccount destAcc, double amount);
+    void transfer(IAccount destAcc, double amount,String destAccountNumber);
     void deductAmount(double amount);
     void deposit(double amount);
 

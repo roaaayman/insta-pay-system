@@ -18,7 +18,7 @@ public class BankAccount implements IAccount{
 
 
     @Override
-    public void transfer(IAccount destAcc, double amount) {
+    public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
 
         IAccount srcAcc=new BankAccount();
 
@@ -26,19 +26,19 @@ public class BankAccount implements IAccount{
         if(destAcc instanceof  WalletAccount)
         {
             TransferToWallet transferToWallet=new TransferToWallet();
-            transferToWallet.transfer(srcAcc,destAcc,amount);
+            transferToWallet.transfer(srcAcc,destAcc,amount,destAccountNumber);
 
         }
         else if(destAcc instanceof  InstapayAccount)
         {
             TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
-            transferToInstapayAccount.transfer(srcAcc,destAcc,amount);
+            transferToInstapayAccount.transfer(srcAcc,destAcc,amount,destAccountNumber);
 
         }
         else if(destAcc instanceof  BankAccount)
         {
             TransferToBank transferToBank=new TransferToBank();
-            transferToBank.transfer(srcAcc,destAcc,amount);
+            transferToBank.transfer(srcAcc,destAcc,amount,destAccountNumber);
         }
         else {
             System.out.println("Unsupported");

@@ -27,6 +27,7 @@ public class Main {
         WalletUser walletUser = null;
         int amountTobeTransferred;
         int amountTobeDeposited;
+        String destinationAccountNumber;
 
         while (!exit) {
             System.out.println("Main Menu");
@@ -69,22 +70,29 @@ public class Main {
                                     case 1:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
-                                        b.transfer(w,amountTobeTransferred);
+                                        System.out.println("Enter the wallet account number you want to transfer to");
+                                        destinationAccountNumber=scanner.nextLine();
+                                        b.transfer(w,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 2:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
-                                        b.transfer(b,amountTobeTransferred);
+                                        System.out.println("Enter the wallet account number you want to transfer to");
+                                        destinationAccountNumber=scanner.nextLine();
+                                        b.transfer(b,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 3:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
-                                        b.transfer(i,amountTobeTransferred);
+                                        System.out.println("Enter the wallet account number you want to transfer to");
+                                        destinationAccountNumber=scanner.nextLine();
+                                        b.transfer(b,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 4:
                                         System.out.println("Enter the amount you want to deposit");
                                         amountTobeDeposited=scanner.nextInt();
                                         b.deposit(amountTobeDeposited);
+                                        System.out.println(bankUser.getBalance());
                                         break;
                                     case 5:
                                         break;
@@ -146,12 +154,16 @@ public class Main {
                                     case 1:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
-                                        w.transfer(w,amountTobeTransferred);
+                                        System.out.println("Enter the wallet account number you want to transfer to");
+                                        destinationAccountNumber=scanner.nextLine();
+                                        w.transfer(w,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 2:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
-                                        w.transfer(i,amountTobeTransferred);
+                                        System.out.println("Enter the wallet account number you want to transfer to");
+                                        destinationAccountNumber=scanner.nextLine();
+                                        w.transfer(i,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 3:
                                         System.out.println("Enter the amount you want to deposit");
