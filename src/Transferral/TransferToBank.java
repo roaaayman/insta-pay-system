@@ -10,7 +10,7 @@ public class TransferToBank implements ITransferStrategy{
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate source account and destination account types
         if (!(sourceAccount instanceof BankAccount) ||
-                !(destinationAccount instanceof BankAccount || destinationAccount instanceof InstapayAccount || destinationAccount instanceof WalletAccount)) {
+                !(destinationAccount instanceof BankAccount )) {
             throw new IllegalArgumentException("Invalid account types for this transfer strategy.");
         }
 

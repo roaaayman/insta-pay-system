@@ -20,19 +20,19 @@ public class WalletAccount implements IAccount{
     @Override
     public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
 
-        IAccount srcAcc=new WalletAccount();
+
 
         deductAmount(amount);
         if(destAcc instanceof  WalletAccount)
         {
             TransferToWallet transferToWallet=new TransferToWallet();
-            transferToWallet.transfer(srcAcc,destAcc,amount,destAccountNumber);
+            transferToWallet.transfer(this,destAcc,amount,destAccountNumber);
 
         }
         else if(destAcc instanceof  InstapayAccount)
         {
             TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
-            transferToInstapayAccount.transfer(srcAcc,destAcc,amount,destAccountNumber);
+            transferToInstapayAccount.transfer(this,destAcc,amount,destAccountNumber);
 
         }
         else {
@@ -46,8 +46,6 @@ public class WalletAccount implements IAccount{
         if (balance >= amount) {
             balance -= amount;
             System.out.println("Deduction successful. Remaining balance: " + balance);
-        } else {
-            System.out.println("Insufficient funds for the transfer.");
         }
     }
 

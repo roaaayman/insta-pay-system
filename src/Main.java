@@ -70,6 +70,7 @@ public class Main {
                                     case 1:
                                         System.out.println("Enter the amount you want to transfer");
                                         amountTobeTransferred=scanner.nextInt();
+                                        scanner.nextLine();
                                         System.out.println("Enter the wallet account number you want to transfer to");
                                         destinationAccountNumber=scanner.nextLine();
                                         b.transfer(w,amountTobeTransferred,destinationAccountNumber);
@@ -86,15 +87,16 @@ public class Main {
                                         amountTobeTransferred=scanner.nextInt();
                                         System.out.println("Enter the wallet account number you want to transfer to");
                                         destinationAccountNumber=scanner.nextLine();
-                                        b.transfer(b,amountTobeTransferred,destinationAccountNumber);
+                                        b.transfer(i,amountTobeTransferred,destinationAccountNumber);
                                         break;
                                     case 4:
                                         System.out.println("Enter the amount you want to deposit");
                                         amountTobeDeposited=scanner.nextInt();
                                         b.deposit(amountTobeDeposited);
-                                        System.out.println(bankUser.getBalance());
+                                        System.out.println("your new balance is $ "+bankUser.getBalance());
                                         break;
                                     case 5:
+                                        System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                         break;
                                     case 6:
                                         //showing bills
@@ -169,8 +171,10 @@ public class Main {
                                         System.out.println("Enter the amount you want to deposit");
                                         amountTobeDeposited=scanner.nextInt();
                                         w.deposit(amountTobeDeposited);
+                                        System.out.println("your new balance is"+walletUser.getBalance());
                                         break;
                                     case 4:
+                                        System.out.println("Your current account balance is $ "+ walletUser.getBalance());
                                         break;
                                     case 5:
                                         //showing bills

@@ -1,5 +1,6 @@
 package Transferral;
 
+import Account.BankAccount;
 import Account.IAccount;
 import Account.InstapayAccount;
 import Account.WalletAccount;
@@ -8,8 +9,8 @@ public class TransferToWallet implements ITransferStrategy{
     @Override
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate source account and destination account types
-        if (!(sourceAccount instanceof WalletAccount) ||
-                !(destinationAccount instanceof WalletAccount || destinationAccount instanceof InstapayAccount)) {
+        if (!(sourceAccount instanceof WalletAccount || sourceAccount instanceof InstapayAccount || sourceAccount instanceof BankAccount) ||
+                !(destinationAccount instanceof WalletAccount)) {
             throw new IllegalArgumentException("Invalid account types for this transfer strategy.");
         }
 
