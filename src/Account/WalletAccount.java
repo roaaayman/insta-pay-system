@@ -16,10 +16,6 @@ public class WalletAccount implements IAccount{
     public void setBalance(double b) {
         balance=b;
     }
-    @Override
-    public void createAccount() {
-
-    }
 
     @Override
     public void transfer(IAccount destAcc, double amount) {
@@ -54,4 +50,12 @@ public class WalletAccount implements IAccount{
             System.out.println("Insufficient funds for the transfer.");
         }
     }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited $" + amount + " into " +
+                "Wallet Account. New balance: $" + balance);
+    }
+
 }

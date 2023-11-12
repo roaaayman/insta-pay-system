@@ -31,12 +31,6 @@ public class InstapayAccount implements IAccount{
 
 
     @Override
-    public void createAccount()
-    {
-
-    }
-
-    @Override
     public void transfer(IAccount destAcc, double amount) {
 
         IAccount srcAcc=new InstapayAccount();
@@ -69,5 +63,12 @@ public class InstapayAccount implements IAccount{
             System.out.println("Insufficient funds for the transfer.");
         }
     }
+
+    @Override
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited $" + amount + " into  Account. New balance: $" + balance);
+    }
+
 }
 
