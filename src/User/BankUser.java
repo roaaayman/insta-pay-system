@@ -1,5 +1,6 @@
 package User;
 
+import Account.IAccount;
 import Bill.IBill;
 import VerificationService.BankVerification;
 
@@ -10,8 +11,8 @@ public class BankUser extends User {
     private String bankAccount;
     private String mobileNumber;
 
-    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber) {
-        super(username, password);
+    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
+        super(username, password,Account);
         this.bankName = bankName;
         this.bankAccount = bankAccount;
         this.mobileNumber = mobileNumber;
