@@ -55,8 +55,7 @@ public class WalletUser extends User {
             }
 
 
-            // Close the scanner
-            scanner.close();
+
         } else {
             System.out.println("Wallet user is already registered.");
         }

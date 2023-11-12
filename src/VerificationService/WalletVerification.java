@@ -10,10 +10,12 @@ public class WalletVerification implements IVerification{
         return 100000 + random.nextInt(900000);
     }
 
+
     @Override
     public boolean verifyOTP(String mobileNum) {
         int generatedOTP = sendOTP();
-        System.out.println(generatedOTP);
+
+        System.out.println("YOUR OTP IS: "+generatedOTP);
 
         // Simulate user entering OTP (you can replace this with actual user input)
         System.out.print("Enter OTP sent to your mobile number: ");
