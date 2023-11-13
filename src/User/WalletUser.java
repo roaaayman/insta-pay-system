@@ -2,8 +2,6 @@ package User;
 
 import Account.IAccount;
 import Bill.IBill;
-import Dummy.Bank;
-import VerificationService.BankVerification;
 import VerificationService.WalletVerification;
 import WalletUserData.Wallet;
 
@@ -13,20 +11,18 @@ import java.util.Scanner;
 public class WalletUser extends User {
     private String mobileNumber;
 
-
-    public WalletUser(String username, String password, String mobileNumber, String WalletProvider,IAccount Account) {
-        super(username, password,Account);
+    public WalletUser(String username, String password, String mobileNumber, String WalletProvider, IAccount Account) {
+        super(username, password, Account);
         this.mobileNumber = mobileNumber;
     }
 
-    public double getBalance(){
+    public double getBalance() {
         return getAccount().getBalance();
     }
 
     public String getMobileNumber() {
         return mobileNumber;
     }
-
 
     public void signUp(List<Wallet> Wallets) {
         if (getUsername() == null) {
@@ -72,13 +68,14 @@ public class WalletUser extends User {
             System.out.println("Wallet user is already registered.");
         }
     }
+
     private boolean isWalletValid(String WalletProvider, String MobileNumber, List<Wallet> wallets) {
         for (Wallet wallet : wallets) {
             if (wallet.getWalletProvider().equalsIgnoreCase(WalletProvider) && wallet.getMobileNumber().equals(MobileNumber)) {
-                return true; // Bank details are valid
+                return true; // Wallet details are valid
             }
         }
-        return false; // Bank details are not found in the list
+        return false; // Wallet details are not found in the list
     }
 
     @Override
@@ -87,5 +84,11 @@ public class WalletUser extends User {
         bill.payBill(this);
     }
 
-
+    // Method to display account details
+    public void displayAccountDetails() {
+        System.out.println("Account Details:");
+        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("Wallet Provider: " + ((Wallet) getAccount()).getWalletProvider());
+        System.out.println("Balance: $" + getBalance());
+    }
 }

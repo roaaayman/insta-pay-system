@@ -1,4 +1,4 @@
-package Dummy;
+package BankDummydata;
 
 import java.util.ArrayList;
 import java.util.List;

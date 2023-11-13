@@ -1,8 +1,8 @@
 import Account.BankAccount;
 import Account.InstapayAccount;
 import Account.WalletAccount;
-import Dummy.Bank;
-import Dummy.DummyBankFactory;
+import BankDummydata.Bank;
+import BankDummydata.DummyBankFactory;
 import User.BankUser;
 import User.WalletUser;
 import WalletUserData.Wallet;

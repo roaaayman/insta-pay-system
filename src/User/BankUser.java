@@ -2,7 +2,7 @@ package User;
 
 import Account.IAccount;
 import Bill.IBill;
-import Dummy.Bank;
+import BankDummydata.Bank;
 import VerificationService.BankVerification;
 
 import java.util.List;
@@ -13,9 +13,8 @@ public class BankUser extends User {
     private String bankAccount;
     private String mobileNumber;
 
-
     public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
-        super(username, password,Account);
+        super(username, password, Account);
         this.bankName = bankName;
         this.bankAccount = bankAccount;
         this.mobileNumber = mobileNumber;
@@ -29,13 +28,9 @@ public class BankUser extends User {
         return mobileNumber;
     }
 
-
-
-    public double getBalance(){
+    public double getBalance() {
         return getAccount().getBalance();
     }
-
-
 
     public void signUp(List<Bank> banks) {
         if (getUsername() == null) {
@@ -104,5 +99,14 @@ public class BankUser extends User {
     public void payBill(IBill bill) {
         // Implement bill payment logic for bank user
         bill.payBill(this);
-}
+    }
+
+    // Method to display account details
+    public void displayAccountDetails() {
+        System.out.println("Account Details:");
+        System.out.println("Bank Name: " + bankName);
+        System.out.println("Bank Account: " + bankAccount);
+        System.out.println("Mobile Number: " + mobileNumber);
+        System.out.println("Balance: $" + getBalance());
+    }
 }
