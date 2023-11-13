@@ -9,17 +9,13 @@ public class WalletAccount implements IAccount{
     private double balance;
     private String AccNum;
 
-    public WalletAccount(String account)
-    {
-        account=AccNum;
 
-    }
 
     public String getAccountNum()
     {
         return AccNum;
     }
-    
+
     @Override
     public double getBalance() {
         return balance;

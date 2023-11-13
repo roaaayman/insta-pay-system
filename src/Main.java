@@ -5,6 +5,8 @@ import Dummy.Bank;
 import Dummy.DummyBankFactory;
 import User.BankUser;
 import User.WalletUser;
+import WalletUserData.Wallet;
+import WalletUserData.WalletDummyFactory;
 
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +20,8 @@ public class Main {
         int billAmount;
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
+        List<Wallet> Wallets = WalletDummyFactory.createWallets();
+
 
         boolean exit = false;
         BankUser bankUser = null;
@@ -106,9 +110,9 @@ public class Main {
                         }
                         break;
                     case 3:
-                        walletUser = new WalletUser(null, null, null, w);
+                        walletUser = new WalletUser(null, null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp(banks);
+                        walletUser.signUp(Wallets);
                         break;
                     case 4:
                         if (walletUser != null) {
