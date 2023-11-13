@@ -59,8 +59,8 @@ public abstract class User {
     }
 
 
-    public abstract void signUp(List<Bank> banks);
 
+    public abstract void signUp();
     public abstract void payBill(IBill bill);
     public IAccount getAccount() {
         return account;

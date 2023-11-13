@@ -37,7 +37,7 @@ public class BankUser extends User {
 
 
     @Override
-    public void signUp(List<Bank> banks) {
+    public void signUp() {
         if (getUsername() == null) {
             Scanner scanner = new Scanner(System.in);
 
@@ -93,9 +93,9 @@ public class BankUser extends User {
     }
 
 
-    @Override
+   // @Override
     public void payBill(IBill bill) {
         // Implement bill payment logic for bank user
         bill.payBill(this);
     }
-}
+}*/

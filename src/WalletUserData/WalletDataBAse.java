@@ -1,4 +1,11 @@
-class WalletDataBAse {
+package WalletUserData;
+
+import Account.WalletAccount;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class WalletDataBAse {
     private static final List<WalletAccount> accounts = new ArrayList<>();
 
     static 
@@ -11,6 +18,6 @@ class WalletDataBAse {
     
     public static List<WalletAccount> getAccounts()
     {
-        retun accounts;
+        return accounts;
     }
 }

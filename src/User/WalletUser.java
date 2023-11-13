@@ -5,6 +5,7 @@ import Bill.IBill;
 import VerificationService.BankVerification;
 import VerificationService.IVerification;
 import VerificationService.WalletVerification;
+import WalletUserData.WalletDataBAse;
 
 import java.util.Scanner;
 
@@ -50,10 +51,11 @@ public class WalletUser extends User {
             System.out.println("Username: " + getUsername());
             System.out.println("Password: " + getPassword());
             System.out.println("Mobile Number: " + mobileNumber);
-            if (isValidAccount(mobileNumber)
+            WalletVerification walletv=new WalletVerification();
+            if (isValidAccount(mobileNumber))
             {
                 System.out.println("Wallet account available.");
-                boolean verified = bankv.verifyOTP(mobileNumber);
+                boolean verified = walletv.verifyOTP(mobileNumber);
             if (verified) {
                 System.out.println("Wallet user signed up successfully.");
             } else {
@@ -62,7 +64,7 @@ public class WalletUser extends User {
 
             }
             else {
-                System.out.println("Invalid Wallet account.")
+                System.out.println("Invalid Wallet account.");
             }
             
 

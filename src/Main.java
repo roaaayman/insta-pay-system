@@ -1,7 +1,7 @@
 import Account.BankAccount;
 import Account.InstapayAccount;
 import Account.WalletAccount;
-import User.BankUser;
+//import User.BankUser;
 import User.WalletUser;
 
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public class Main {
         int billAmount;
 
         boolean exit = false;
-        BankUser bankUser = null;
+        //BankUser bankUser = null;
         WalletUser walletUser = null;
         int amountToBeTransferred;
         int amountToBeDeposited;
@@ -36,7 +36,7 @@ public class Main {
                 int choice = Integer.parseInt(choiceStr);
 
                 switch (choice) {
-                    case 1:
+                    /*case 1:
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
                         bankUser.signUp();
@@ -99,7 +99,7 @@ public class Main {
                         } else {
                             System.out.println("Bank User is not signed up.");
                         }
-                        break;
+                        break;*/
                     case 3:
                         walletUser = new WalletUser(null, null, null, w);
                         System.out.println("Wallet User Sign-Up:");
