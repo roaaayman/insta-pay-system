@@ -19,7 +19,7 @@ public class TransferToWallet implements ITransferStrategy{
             System.out.println("Insufficient funds in the source account.");
         }
         sourceAccount.deductAmount(amount);
-        destinationAccount.deposit(amount);
+        destinationAccount.deposit(sourceAccount.deductAmount(amount));
 
         // Implement logic for transferring to different account types
         // You may need to interact with the wallet provider's API or update the account balances

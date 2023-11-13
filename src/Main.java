@@ -8,10 +8,14 @@ import User.WalletUser;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static List<BankUser> bankUsers = new ArrayList<>();
+    private static List<WalletUser> walletUsers = new ArrayList<>();
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -51,16 +55,16 @@ public class Main {
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
                         bankUser.signUp(banks);
+                        bankUsers.add(bankUser);
                         
                         break;
                     case 2:
-                        if (bankUser != null) {
+
+
+                        if (!bankUsers.isEmpty()) {
                             System.out.println("Bank User Sign-In:");
                             bankUser.signIn();
-
-
-                            // Check if sign-in was successful before entering the inner loop
-                            if (bankUser.isAuthenticated()) {
+                            if (bankUsers.contains(bankUser)) {
                                 System.out.println("User authenticated successfully.");
                                 bankUser.displayAccountDetails();
                                 while (!exitinner) {
@@ -72,6 +76,7 @@ public class Main {
                                     System.out.println("5. Inquire about his balance");
                                     System.out.println("6. pay bills");
                                     System.out.println("7. Exit");
+
                                     System.out.print("Enter your choice: ");
                                     int bankChoice = scanner.nextInt();
                                     switch (bankChoice) {
@@ -86,6 +91,7 @@ public class Main {
                                         case 2:
                                             System.out.println("Enter the amount you want to transfer");
                                             amountToBeTransferred=scanner.nextInt();
+                                            scanner.nextLine();
                                             System.out.println("Enter the wallet account number you want to transfer to");
                                             destinationAccountNumber=scanner.nextLine();
                                             b.transfer(b,amountToBeTransferred,destinationAccountNumber);
@@ -120,9 +126,14 @@ public class Main {
                                 System.out.println("----------------------------------");
 
                             }
+
                         } else {
-                            System.out.println("Bank User is not signed up.");
+                            System.out.println("No bank users signed up. Please sign up first.");
+                            break;
                         }
+                            // Check if sign-in was successful before entering the inner loop
+
+
                         break;
                     case 3:
                         walletUser = new WalletUser(null, null, null, null,w);
