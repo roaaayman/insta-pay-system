@@ -1,5 +1,6 @@
 package User;
 
+import Account.BankAccount;
 import Account.IAccount;
 import Bill.IBill;
 import Dummy.Bank;
@@ -12,6 +13,7 @@ public class BankUser extends User {
     private String bankName;
     private String bankAccount;
     private String mobileNumber;
+
 
     public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
         super(username, password,Account);
@@ -26,6 +28,10 @@ public class BankUser extends User {
 
     public String getMobileNumber() {
         return mobileNumber;
+    }
+
+    public double getBalance(){
+        return getAccount().getBalance();
     }
 
 
