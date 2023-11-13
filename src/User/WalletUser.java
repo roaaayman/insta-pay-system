@@ -25,7 +25,7 @@ public class WalletUser extends User {
         return mobileNumber;
     }
 
-    @Override
+
     public void signUp() {
         if (getUsername() == null) {
             Scanner scanner = new Scanner(System.in);

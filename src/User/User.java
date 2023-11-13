@@ -75,7 +75,6 @@ public abstract class User {
         return account.getBalance();
     }
 
-    public abstract void signUp(List<Bank> banks);
 
     public abstract void payBill(IBill bill);
 

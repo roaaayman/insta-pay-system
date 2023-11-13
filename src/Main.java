@@ -108,7 +108,7 @@ public class Main {
                     case 3:
                         walletUser = new WalletUser(null, null, null, w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp(banks);
+                        walletUser.signUp();
                         break;
                     case 4:
                         if (walletUser != null) {

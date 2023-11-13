@@ -4,6 +4,12 @@ import Account.IAccount;
 import Bill.IBill;
 import Dummy.Bank;
 import VerificationService.BankVerification;
+import DummyBills.Bill;
+import DummyBills.GasBill;
+import DummyBills.WaterBill;
+import DummyBills.ElectricityBill;
+import DummyBills.BillDemo;
+
 
 import java.util.List;
 import java.util.Scanner;
@@ -98,6 +104,23 @@ public class BankUser extends User {
             }
         }
         return false; // Bank details are not found in the list
+    }
+
+    public void checkBills(List<Bill> bills) {
+        // Check bills associated with the user's account number
+        for (Bill bill : bills) {
+            if (bill.getAccountNumber().equals(bankAccount)) {
+                if (bill instanceof GasBill) {
+                    System.out.println("You have a Gas bill with amount $" + bill.getAmount());
+                } else if (bill instanceof WaterBill) {
+                    System.out.println("You have a Water bill with amount $" + bill.getAmount());
+                } else if (bill instanceof ElectricityBill) {
+                    System.out.println("You have an Electricity bill with amount $" + bill.getAmount());
+                } else {
+                    System.out.println("You have a bill with amount $" + bill.getAmount());
+                }
+            }
+        }
     }
 
     @Override
