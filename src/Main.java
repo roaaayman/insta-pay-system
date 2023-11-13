@@ -1,9 +1,12 @@
 import Account.BankAccount;
 import Account.InstapayAccount;
 import Account.WalletAccount;
-//import User.BankUser;
+import Dummy.Bank;
+import Dummy.DummyBankFactory;
+import User.BankUser;
 import User.WalletUser;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -13,9 +16,11 @@ public class Main {
         BankAccount b = new BankAccount();
         InstapayAccount i = new InstapayAccount();
         int billAmount;
+        // Assuming you have a list of banks created by DummyBankFactory
+        List<Bank> banks = DummyBankFactory.createBanks();
 
         boolean exit = false;
-        //BankUser bankUser = null;
+        BankUser bankUser = null;
         WalletUser walletUser = null;
         int amountToBeTransferred;
         int amountToBeDeposited;
@@ -36,10 +41,10 @@ public class Main {
                 int choice = Integer.parseInt(choiceStr);
 
                 switch (choice) {
-                    /*case 1:
+                    case 1:
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
-                        bankUser.signUp();
+                        bankUser.signUp(banks);
                         break;
                     case 2:
                         if (bankUser != null) {
@@ -99,11 +104,11 @@ public class Main {
                         } else {
                             System.out.println("Bank User is not signed up.");
                         }
-                        break;*/
+                        break;
                     case 3:
                         walletUser = new WalletUser(null, null, null, w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp();
+                        walletUser.signUp(banks);
                         break;
                     case 4:
                         if (walletUser != null) {

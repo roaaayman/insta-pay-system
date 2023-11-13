@@ -2,7 +2,9 @@ package User;
 
 import Account.IAccount;
 import Bill.IBill;
+import Dummy.Bank;
 
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class User {
@@ -37,8 +39,7 @@ public abstract class User {
         this.password = password;
     }
 
-    // Abstract sign-up method to be implemented by concrete subclasses
-    public abstract void signUp();
+
 
     // Display profile function
     public void displayProfile() {
@@ -74,6 +75,8 @@ public abstract class User {
         return account.getBalance();
     }
 
+    public abstract void signUp(List<Bank> banks);
+
     public abstract void payBill(IBill bill);
 
     public IAccount getAccount() {
@@ -84,5 +87,5 @@ public abstract class User {
     public boolean isAuthenticated() {
         // Use the enteredUsername and enteredPassword variables here
         return enteredUsername.equals(username) && enteredPassword.equals(password);
-    }
+}
 }

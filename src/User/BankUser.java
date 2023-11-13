@@ -1,6 +1,5 @@
 package User;
 
-import Account.BankAccount;
 import Account.IAccount;
 import Bill.IBill;
 import Dummy.Bank;
@@ -30,14 +29,15 @@ public class BankUser extends User {
         return mobileNumber;
     }
 
+
+
     public double getBalance(){
         return getAccount().getBalance();
     }
 
 
-
     @Override
-    public void signUp() {
+    public void signUp(List<Bank> banks) {
         if (getUsername() == null) {
             Scanner scanner = new Scanner(System.in);
 
@@ -53,49 +53,56 @@ public class BankUser extends User {
 
             // Prompt the user for the bank name
             System.out.print("Enter Bank Name: ");
-            String userBankName = scanner.nextLine();
+            String bankName = scanner.nextLine();
 
             // Prompt the user for the bank account details as a string
             System.out.print("Enter Bank Account (as a string): ");
-            String userBankAccount = scanner.nextLine();
+            String bankAccount = scanner.nextLine();
 
-            // Check if the entered bank name and bank account match any banks in the list
-            boolean bankFound = false;
-            for (Bank bank : banks) {
-                if (userBankName.equals(bank.getBankName()) && userBankAccount.equals(bank.getBankAccount())) {
-                    bankFound = true;
-                    break;
-                }
-            }
+            // Prompt the user for the mobile number
+            System.out.print("Enter Mobile Number: ");
+            String mobileNumber = scanner.nextLine();
 
-            if (bankFound) {
+            // Check if the entered bank details exist in the list
+            if (isBankValid(bankName, bankAccount, banks)) {
                 setUsername(username);
                 setPassword(password);
 
                 System.out.println("Username: " + getUsername());
                 System.out.println("Password: " + getPassword());
-                System.out.println("Bank Name: " + userBankName);
-                System.out.println("Bank Account: " + userBankAccount);
+                System.out.println("Bank Name: " + bankName);
+                System.out.println("Bank Account: " + bankAccount);
+                System.out.println("Mobile Number: " + mobileNumber);
 
                 BankVerification bankv = new BankVerification();
-                boolean verified = bankv.verifyOTP(getMobileNumber());
+                boolean verified = bankv.verifyOTP(mobileNumber);
                 if (verified) {
                     System.out.println("Bank user signed up successfully.");
                 } else {
                     System.out.println("OTP verification failed. Bank user not signed up.");
                 }
             } else {
-                System.out.println("Bank name and account not found in the list. Bank user not signed up.");
+                System.out.println("Invalid bank details. Bank user not signed up.");
             }
+
         } else {
             System.out.println("Bank user is already registered.");
         }
     }
 
+    // Method to check if the entered bank details exist in the list
+    private boolean isBankValid(String bankName, String bankAccount, List<Bank> banks) {
+        for (Bank bank : banks) {
+            if (bank.getBankName().equalsIgnoreCase(bankName) && bank.getBankAccount().equals(bankAccount)) {
+                return true; // Bank details are valid
+            }
+        }
+        return false; // Bank details are not found in the list
+    }
 
-   // @Override
+    @Override
     public void payBill(IBill bill) {
         // Implement bill payment logic for bank user
         bill.payBill(this);
-    }
-}*/
+}
+}
