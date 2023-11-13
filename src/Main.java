@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         WalletAccount w = new WalletAccount();
         BankAccount b = new BankAccount();
@@ -55,8 +56,11 @@ public class Main {
                             System.out.println("Bank User Sign-In:");
                             bankUser.signIn();
 
+
                             // Check if sign-in was successful before entering the inner loop
                             if (bankUser.isAuthenticated()) {
+                                System.out.println("User authenticated successfully.");
+                                bankUser.displayAccountDetails();
                                 while (!exit) {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
@@ -64,7 +68,7 @@ public class Main {
                                     System.out.println("3. Transfer to instapay Account");
                                     System.out.println("4. Deposit");
                                     System.out.println("5. Inquire about his balance");
-                                    System.out.println("6. Pay bill");
+                                    System.out.println("6. display details");
                                     System.out.println("7. Exit");
                                     System.out.print("Enter your choice: ");
                                     int bankChoice = scanner.nextInt();
@@ -100,6 +104,8 @@ public class Main {
                                         case 5:
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
+                                        case 6:
+                                            bankUser.displayAccountDetails();
                                     }
                                 }
                             } else {
@@ -118,8 +124,8 @@ public class Main {
                         if (walletUser != null) {
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
+                            walletUser.displayAccountDetails();
 
-                            // Check if sign-in was successful before entering the inner loop
                             if (walletUser.isAuthenticated()) {
                                 while (!exit) {
                                     System.out.println("Wallet User Menu");

@@ -1,13 +1,24 @@
 package Bill;
 
-
 import User.User;
 
-public class GasBill implements IBill{
+public class GasBill implements IBill {
     private double amount;
+    private String accountNumber;
 
-    public GasBill(double amount) {
+    public GasBill(String accountNumber, double amount) {
+        this.accountNumber = accountNumber;
         this.amount = amount;
+    }
+
+    @Override
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    @Override
+    public double getAmount() {
+        return amount;
     }
 
     @Override

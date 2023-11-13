@@ -70,7 +70,7 @@ public class InstapayAccount implements IAccount{
         return "insta pay Account";
     }
 
-    @Override
+   @Override
     public void displayAccountDetails() {
         System.out.println("Account Type: " + getAccountType());
         System.out.println("Balance: $" + getBalance());
