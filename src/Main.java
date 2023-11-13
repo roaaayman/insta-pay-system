@@ -68,7 +68,7 @@ public class Main {
                                     System.out.println("3. Transfer to instapay Account");
                                     System.out.println("4. Deposit");
                                     System.out.println("5. Inquire about his balance");
-                                    System.out.println("6. display details");
+                                    System.out.println("6. pay bills");
                                     System.out.println("7. Exit");
                                     System.out.print("Enter your choice: ");
                                     int bankChoice = scanner.nextInt();
@@ -105,11 +105,17 @@ public class Main {
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
                                         case 6:
-                                            bankUser.displayAccountDetails();
+                                            bankUser.chooseAndPayBill();
+                                            break;
+                                        case 7:
+                                            exit=true;
+                                            break;
                                     }
                                 }
                             } else {
                                 System.out.println("Bank User authentication failed. Returning to Main Menu.");
+                                System.out.println("----------------------------------");
+
                             }
                         } else {
                             System.out.println("Bank User is not signed up.");
@@ -158,6 +164,13 @@ public class Main {
                                         case 4:
                                             System.out.println("Your current account balance is $ "+ walletUser.getBalance());
                                             break;
+                                        case 5:
+                                            walletUser.chooseAndPayBill();
+                                            break;
+                                        case 6:
+                                            exit=true;
+                                            break;
+
                                     }
                                 }
                             } else {
