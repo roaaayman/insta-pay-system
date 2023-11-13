@@ -2,9 +2,7 @@ package User;
 
 import Account.IAccount;
 import Bill.IBill;
-import Dummy.Bank;
 
-import java.util.List;
 import java.util.Scanner;
 
 public abstract class User {
@@ -74,6 +72,7 @@ public abstract class User {
     public double getBalance() {
         return account.getBalance();
     }
+
 
 
     public abstract void payBill(IBill bill);

@@ -1,4 +1,4 @@
-package Dummy;
+package BankDummydata;
 
 public class Bank {
     private String bankName;
