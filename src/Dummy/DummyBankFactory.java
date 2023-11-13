@@ -3,22 +3,20 @@ package Dummy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankFactory {
+public class DummyBankFactory {
+
     public static List<Bank> createBanks() {
         List<Bank> banks = new ArrayList<>();
 
         // Bank 1
-        Bank nbe = new Bank();
-        banks.add(nbe);
+        banks.add(new Bank("BankA", "123456789"));
 
         // Bank 2
-        Bank bankMisr = new Bank();
-        banks.add(bankMisr);
+        banks.add(new Bank("BankB", "987654321"));
 
         // Bank 3
-        Bank qnb = new Bank();
-        banks.add(qnb);
+        banks.add(new Bank("BankC", "555566667"));
 
         return banks;
-    }
+}
 }
