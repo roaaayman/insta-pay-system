@@ -1,14 +1,10 @@
 package Dummy;
 
-import User.BankUser;
-
-import java.util.List;
-
-public abstract class Bank {
+public class Bank {
     private String bankName;
     private String bankAccount;
 
-    public Bank() {
+    public Bank(String bankName, String bankAccount) {
         this.bankName = bankName;
         this.bankAccount = bankAccount;
     }
@@ -19,22 +15,5 @@ public abstract class Bank {
 
     public String getBankAccount() {
         return bankAccount;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
-    }
-
-    public void setBankAccount(String bankAccount) {
-        this.bankAccount = bankAccount;
-    }
-
-    @Override
-    public String toString() {
-        return "Bank Name: " + bankName + "\nBank Account: " + bankAccount;
-    }
-
-    public abstract List<BankUser> getBankUsers();
-
-    public abstract void addBankUser(BankUser user);
+}
 }
