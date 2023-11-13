@@ -50,13 +50,21 @@ public class WalletUser extends User {
             System.out.println("Username: " + getUsername());
             System.out.println("Password: " + getPassword());
             System.out.println("Mobile Number: " + mobileNumber);
-            WalletVerification bankv=new WalletVerification();
-            boolean verified = bankv.verifyOTP(mobileNumber);
+            if (isValidAccount(mobileNumber)
+            {
+                System.out.println("Wallet account available.");
+                boolean verified = bankv.verifyOTP(mobileNumber);
             if (verified) {
                 System.out.println("Wallet user signed up successfully.");
             } else {
                 System.out.println("OTP verification failed. Bank user not signed up.");
             }
+
+            }
+            else {
+                System.out.println("Invalid Wallet account.")
+            }
+            
 
 
 
@@ -64,6 +72,12 @@ public class WalletUser extends User {
             System.out.println("Wallet user is already registered.");
         }
     }
+    private boolean isValidAccount(String accountNumber) {
+        // Check if the entered account number exists in the in-memory bank database
+        return WalletDataBAse.getAccounts().stream()
+                .anyMatch(account -> account.getAccountNum().equals(accountNumber));
+    }
+
     @Override
     public void payBill(IBill bill) {
         // Implement bill payment logic for wallet user

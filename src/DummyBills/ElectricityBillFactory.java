@@ -2,9 +2,9 @@ package DummyBills;
 
 import Bill.ElectricityBill;
 import Bill.IBill;
-
 import java.util.ArrayList;
 import java.util.List;
+
 public class ElectricityBillFactory implements IDummyBill {
 
     @Override
@@ -16,3 +16,5 @@ public class ElectricityBillFactory implements IDummyBill {
         return electricityBills;
     }
 }
+
+

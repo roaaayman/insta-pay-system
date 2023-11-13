@@ -3,11 +3,13 @@ package Dummy;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConcreteBank implements Bank {
+public class ConcreteBank extends Bank {
     private String bankName;
     private List<User.BankUser> bankUsers;
 
     public ConcreteBank(String bankName) {
+        super();
+
         this.bankName = bankName;
         this.bankUsers = new ArrayList<>();
     }
