@@ -4,10 +4,37 @@ import User.BankUser;
 
 import java.util.List;
 
-public interface Bank {
-    String getBankName();
+public abstract class Bank {
+    private String bankName;
+    private String bankAccount;
 
-    List<BankUser> getBankUsers();
+    public Bank() {
+        this.bankName = bankName;
+        this.bankAccount = bankAccount;
+    }
 
-    void addBankUser(User.BankUser bankuser);
+    public String getBankName() {
+        return bankName;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    @Override
+    public String toString() {
+        return "Bank Name: " + bankName + "\nBank Account: " + bankAccount;
+    }
+
+    public abstract List<BankUser> getBankUsers();
+
+    public abstract void addBankUser(BankUser user);
 }

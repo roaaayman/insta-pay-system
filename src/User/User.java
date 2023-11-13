@@ -2,7 +2,9 @@ package User;
 
 import Account.IAccount;
 import Bill.IBill;
+import Dummy.Bank;
 
+import java.util.List;
 import java.util.Scanner;
 
 public abstract class User {
@@ -34,7 +36,7 @@ public abstract class User {
     }
 
     // Abstract sign-up method to be implemented by concrete subclasses
-    public abstract void signUp();
+
 
     public void signIn() {
         Scanner scanner = new Scanner(System.in);
@@ -57,6 +59,7 @@ public abstract class User {
     }
 
 
+    public abstract void signUp(List<Bank> banks);
 
     public abstract void payBill(IBill bill);
     public IAccount getAccount() {
