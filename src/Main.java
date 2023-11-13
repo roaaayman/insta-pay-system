@@ -25,6 +25,7 @@ public class Main {
 
 
         boolean exit = false;
+        boolean exitinner=false;
         BankUser bankUser = null;
         WalletUser walletUser = null;
         int amountToBeTransferred;
@@ -50,6 +51,7 @@ public class Main {
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
                         bankUser.signUp(banks);
+                        
                         break;
                     case 2:
                         if (bankUser != null) {
@@ -61,7 +63,7 @@ public class Main {
                             if (bankUser.isAuthenticated()) {
                                 System.out.println("User authenticated successfully.");
                                 bankUser.displayAccountDetails();
-                                while (!exit) {
+                                while (!exitinner) {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
                                     System.out.println("2. Transfer to Bank Account");
@@ -108,7 +110,8 @@ public class Main {
                                             bankUser.chooseAndPayBill();
                                             break;
                                         case 7:
-                                            exit=true;
+
+                                            exitinner=true;
                                             break;
                                     }
                                 }
@@ -168,7 +171,7 @@ public class Main {
                                             walletUser.chooseAndPayBill();
                                             break;
                                         case 6:
-                                            exit=true;
+
                                             break;
 
                                     }

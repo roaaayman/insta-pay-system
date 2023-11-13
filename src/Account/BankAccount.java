@@ -1,9 +1,15 @@
 package Account;
 
+import BankDummydata.Bank;
+import BankDummydata.DummyBankFactory;
 import Transferral.ITransferStrategy;
 import Transferral.TransferToBank;
 import Transferral.TransferToInstapayAccount;
 import Transferral.TransferToWallet;
+import WalletUserData.Wallet;
+import WalletUserData.WalletDummyFactory;
+
+import java.util.List;
 
 public class BankAccount implements IAccount{
     private double balance;
@@ -21,12 +27,27 @@ public class BankAccount implements IAccount{
     public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
 
 
-        deductAmount(amount);
+        List<Bank> banks = DummyBankFactory.createBanks();
+        List<Wallet> wallets = WalletDummyFactory.createWallets();
+
+        boolean isValidDestination = false;
+
 
         if(destAcc instanceof  WalletAccount)
         {
-            TransferToWallet transferToWallet=new TransferToWallet();
-            transferToWallet.transfer(this,destAcc,amount,destAccountNumber);
+            for (Wallet wallet : wallets) {
+                if (wallet.getMobileNumber().equals(destAccountNumber)) {
+                    isValidDestination = true;
+
+                    TransferToWallet transferToWallet=new TransferToWallet();
+                    transferToWallet.transfer(this,destAcc,amount,destAccountNumber);
+                    break;
+                }
+            }
+            if (!isValidDestination) {
+                System.out.println("Invalid destination account number. Transfer failed.");
+                return;
+            }
 
 
         }
@@ -38,8 +59,18 @@ public class BankAccount implements IAccount{
         }
         else if(destAcc instanceof  BankAccount)
         {
-            TransferToBank transferToBank=new TransferToBank();
-            transferToBank.transfer(this,destAcc,amount,destAccountNumber);
+            for (Bank bank : banks) {
+                if (bank.getBankAccount().equals(destAccountNumber)) {
+                    isValidDestination = true;
+                    TransferToBank transferToBank=new TransferToBank();
+                    transferToBank.transfer(this,destAcc,amount,destAccountNumber);
+                    break;
+                }
+            }
+            if (!isValidDestination) {
+                System.out.println("Invalid destination account number. Transfer failed.");
+                return;
+            }
         }
         else {
             System.out.println("Unsupported");
