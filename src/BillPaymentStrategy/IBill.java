@@ -1,4 +1,4 @@
-package Bill;
+package BillPaymentStrategy;
 
 import User.User;
 
@@ -6,7 +6,8 @@ import User.User;
 public interface IBill {
     String getAccountNumber();
     double getAmount();
-    void payBill(User user);
+    public void payBill(User user) ;
+    void markAsPaid();
     boolean isPaid();
 
 }

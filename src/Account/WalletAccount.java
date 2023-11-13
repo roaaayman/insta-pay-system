@@ -4,10 +4,6 @@ import Transferral.ITransferStrategy;
 import Transferral.TransferToBank;
 import Transferral.TransferToInstapayAccount;
 import Transferral.TransferToWallet;
-import WalletUserData.Wallet;
-import WalletUserData.WalletDummyFactory;
-
-import java.util.List;
 
 public class WalletAccount implements IAccount{
     private double balance;
@@ -34,24 +30,11 @@ public class WalletAccount implements IAccount{
     public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
 
 
-        List<Wallet> wallets = WalletDummyFactory.createWallets();
 
-        boolean isValidDestination = false;
-
+        deductAmount(amount);
         if(destAcc instanceof  WalletAccount)
         {
-            for (Wallet wallet : wallets) {
-                if (wallet.getMobileNumber().equals(destAccountNumber)) {
-                    isValidDestination = true;
-                    TransferToWallet transferToWallet=new TransferToWallet();
-                    transferToWallet.transfer(this,destAcc,amount,destAccountNumber);
-                    break;
-                }
-            }
-            if (!isValidDestination) {
-                System.out.println("Invalid destination account number. Transfer failed.");
-                return;
-            }
+
         }
         else if(destAcc instanceof  InstapayAccount)
         {

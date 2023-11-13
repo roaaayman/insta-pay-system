@@ -1,11 +1,10 @@
 package User;
 
 import Account.IAccount;
-import Bill.ElectricityBill;
-import Bill.GasBill;
-import Bill.IBill;
-import Bill.WaterBill;
-import BillData.BankUserBills;
+import BillPaymentStrategy.ElectricityBill;
+import BillPaymentStrategy.GasBill;
+import BillPaymentStrategy.IBill;
+import BillPaymentStrategy.WaterBill;
 import BillData.WalletUserBills;
 import VerificationService.WalletVerification;
 import WalletUserData.Wallet;
@@ -35,8 +34,8 @@ public class WalletUser extends User {
     public String getWalletProvider() {
         return WalletProvider;
     }
-    public void setWalletProvider(String Walletprovider) {
-        Walletprovider=Walletprovider;
+    public void setWalletProvider(String walletprovider) {
+        WalletProvider=walletprovider;
     }
 
 
@@ -69,25 +68,19 @@ public class WalletUser extends User {
             setWalletProvider(WalletProvider);
             setMobileNumber(mobileNumber);
 
-            if (isWalletValid(WalletProvider, mobileNumber, Wallets)) {
+            WalletVerification walletv = new WalletVerification();
+            if (walletv.isWalletValid(WalletProvider, mobileNumber, Wallets)) {
                 setUsername(username);
                 setPassword(password);
 
                 System.out.println("Account Available in Wallet provider "+WalletProvider);
                 System.out.println("----------------------------------");
+                loadDetails();
 
 
-
-                WalletVerification walletv = new WalletVerification();
                 boolean verified = walletv.verifyOTP(mobileNumber);
                 if (verified) {
-                    System.out.println("Wallet user signed up successfully.");
-                    System.out.println("----------------------------------");
-                    System.out.println("Your Profile");
-                    System.out.println("Username: " + getUsername());
-                    System.out.println("Password: " + getPassword());
-                    System.out.println("Wallet Provider Name: " + WalletProvider);
-                    System.out.println("Mobile Number associated with the wallet: " + mobileNumber);
+
                 } else {
                     System.out.println("OTP verification failed. Wallet user not signed up.");
                 }
@@ -100,14 +93,17 @@ public class WalletUser extends User {
         }
     }
 
-    private boolean isWalletValid(String WalletProvider, String MobileNumber, List<Wallet> wallets) {
-        for (Wallet wallet : wallets) {
-            if (wallet.getWalletProvider().equalsIgnoreCase(WalletProvider) && wallet.getMobileNumber().equals(MobileNumber)) {
-                return true; // Wallet details are valid
-            }
-        }
-        return false; // Wallet details are not found in the list
+    public void loadDetails()
+    {
+        System.out.println("Wallet user signed up successfully.");
+        System.out.println("----------------------------------");
+        System.out.println("Your Profile");
+        System.out.println("Username: " + getUsername());
+        System.out.println("Password: " + getPassword());
+        System.out.println("Wallet Provider Name: " + WalletProvider);
+        System.out.println("Mobile Number associated with the wallet: " + mobileNumber);
     }
+
     public void checkBills(List<IBill> bills) {
         for (IBill bill : bills) {
             if (bill.getAccountNumber().equals(mobileNumber)) {

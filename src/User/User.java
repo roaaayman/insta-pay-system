@@ -1,12 +1,13 @@
 package User;
 
 import Account.IAccount;
-import Bill.IBill;
+import BillPaymentStrategy.IBill;
 
 import java.util.Scanner;
 
 public abstract class User {
     private final IAccount account;
+
     private String username;
     private String password;
 
@@ -44,10 +45,10 @@ public abstract class User {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your username: ");
-         enteredUsername = scanner.nextLine();
+        enteredUsername = scanner.nextLine();
 
         System.out.print("Enter your password: ");
-         enteredPassword = scanner.nextLine();
+        enteredPassword = scanner.nextLine();
     }
 
     public abstract void payBill(IBill bill);
@@ -60,5 +61,7 @@ public abstract class User {
     public boolean isAuthenticated() {
         // Use the enteredUsername and enteredPassword variables here
         return enteredUsername.equals(username) && enteredPassword.equals(password);
-}
+    }
+
+
 }

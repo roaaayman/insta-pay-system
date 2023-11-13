@@ -1,19 +1,24 @@
 package BillData;
 
-import Bill.ElectricityBill;
-import Bill.GasBill;
-import Bill.IBill;
-import Bill.WaterBill;
+import BillPaymentStrategy.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WalletUserBills {
+
     public static List<IBill> initializeBills() {
         List<IBill> bills = new ArrayList<>();
-        bills.add(new GasBill("01026224584", 30.0)); // Adjusted amounts for wallet bills
-        bills.add(new GasBill("01253050169", 45.0));
-        bills.add(new WaterBill("01155690022", 20.0));
+
+        // Assuming you have instances of BankAccountPaymentStrategy, WalletAccountPaymentStrategy,
+        // and InstaPayAccountPaymentStrategy already created
+        IBIllPaymentStrategy gas = new GasBillPaymentStrategy();
+        IBIllPaymentStrategy water = new WaterBillPaymentStrategy();
+        IBIllPaymentStrategy electricity = new ElectricityBillPaymentStrategy();
+
+        bills.add(new GasBill("01026224584", 30.0,gas)); // Adjusted amounts for wallet bills
+        bills.add(new GasBill("01253050169", 45.0,gas));
+        bills.add(new WaterBill("01155690022", 20.0,water));
         return bills;
     }
 }

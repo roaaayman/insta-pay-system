@@ -1,11 +1,11 @@
 package User;
 
 import Account.IAccount;
-import Bill.ElectricityBill;
-import Bill.GasBill;
-import Bill.IBill;
+import BillPaymentStrategy.ElectricityBill;
+import BillPaymentStrategy.GasBill;
+import BillPaymentStrategy.IBill;
 import BankDummydata.Bank;
-import Bill.WaterBill;
+import BillPaymentStrategy.WaterBill;
 import VerificationService.BankVerification;
 import BillData.BankUserBills;
 
@@ -18,6 +18,8 @@ public class BankUser extends User {
     private String bankName;
     private String bankAccount;
     private String mobileNumber;
+    private static List<BankUser> signedUpUsers = new ArrayList<>();
+
     List<IBill> bills = BankUserBills.initializeBills();
 
 
@@ -88,9 +90,9 @@ public class BankUser extends User {
             setBankName(bankName);
             setBankAccount(bankAccount);
             setMobileNumber(mobileNumber);
-
+            BankVerification bankv = new BankVerification();
             // Check if the entered bank details exist in the list
-            if (isBankValid(bankName, bankAccount, banks)) {
+            if (bankv.isBankValid(bankName, bankAccount, banks)) {
                 setUsername(username);
                 setPassword(password);
 
@@ -99,7 +101,7 @@ public class BankUser extends User {
 
 
 
-                BankVerification bankv = new BankVerification();
+
                 boolean verified = bankv.verifyOTP(mobileNumber);
                 if (verified) {
                     System.out.println("Bank user signed up successfully.");
@@ -127,15 +129,9 @@ public class BankUser extends User {
 
     }
 
+
     // Method to check if the entered bank details exist in the list
-    private boolean isBankValid(String bankName, String bankAccount, List<Bank> banks) {
-        for (Bank bank : banks) {
-            if (bank.getBankName().equalsIgnoreCase(bankName) && bank.getBankAccount().equals(bankAccount)) {
-                return true; // Bank details are valid
-            }
-        }
-        return false; // Bank details are not found in the list
-    }
+
     public void checkBills(List<IBill> bills) {
         // Check bills associated with the user's account number
         for (IBill bill : bills) {
@@ -241,4 +237,5 @@ public class BankUser extends User {
             System.out.println("----------------------------------");
         }
     }
+
 }

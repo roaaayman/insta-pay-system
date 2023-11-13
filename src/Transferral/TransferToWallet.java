@@ -11,12 +11,12 @@ public class TransferToWallet implements ITransferStrategy{
         // Validate source account and destination account types
         if (!(sourceAccount instanceof WalletAccount || sourceAccount instanceof InstapayAccount || sourceAccount instanceof BankAccount) ||
                 !(destinationAccount instanceof WalletAccount)) {
-            throw new IllegalArgumentException("Invalid account types for this transfer strategy.");
+            System.out.println("Invalid account types for this transfer strategy.");
         }
 
         // Check if the source account has sufficient balance
         if (sourceAccount.getBalance() < amount) {
-            throw new IllegalStateException("Insufficient funds in the source account.");
+            System.out.println("Insufficient funds in the source account.");
         }
         sourceAccount.deductAmount(amount);
         destinationAccount.deposit(amount);
