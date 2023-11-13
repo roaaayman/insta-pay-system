@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CustomerWalletProvider implements WalletProvider{
     private String providerName;
-    private List<WalletUser> walletUsers;
+    private List<WalletAccount> walletUsers;
 
     public CustomerWalletProvider(String providerName) {
         this.providerName = providerName;
