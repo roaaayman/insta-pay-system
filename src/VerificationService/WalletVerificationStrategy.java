@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class WalletVerification implements IVerification{
+public class WalletVerificationStrategy implements IVerificationStrategy {
     @Override
     public int sendOTP() {
         Random random = new Random();

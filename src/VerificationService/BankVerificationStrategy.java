@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class BankVerification implements IVerification {
-    List<IBill> bills = BankUserBills.initializeBills();
+public class BankVerificationStrategy implements IVerificationStrategy {
+
     @Override
     public int sendOTP() {
         Random random = new Random();

@@ -1,6 +1,6 @@
 package VerificationService;
 
-public interface IVerification {
+public interface IVerificationStrategy {
     int sendOTP();
     boolean verifyOTP(String mobileNum);
 }

@@ -1,6 +1,6 @@
 package BillPaymentStrategy;
 
-import User.User;
+import User.InstaPayUser;
 
 public class ElectricityBill implements IBill {
     private double amount;
@@ -25,8 +25,8 @@ public class ElectricityBill implements IBill {
     }
 
     @Override
-    public void payBill(User user) {
-        paymentStrategy.payBill(this, user);
+    public void payBill(InstaPayUser instaPayUser) {
+        paymentStrategy.payBill(this, instaPayUser);
     }
 
     @Override

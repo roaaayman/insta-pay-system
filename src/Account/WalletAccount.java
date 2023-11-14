@@ -2,9 +2,6 @@ package Account;
 
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
-import Transferral.ITransferStrategy;
-import Transferral.TransferToBank;
-import Transferral.TransferToInstapayAccount;
 import Transferral.TransferToWallet;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;

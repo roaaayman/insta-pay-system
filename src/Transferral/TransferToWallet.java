@@ -18,6 +18,7 @@ public class TransferToWallet implements ITransferStrategy{
         if (sourceAccount.getBalance() < amount) {
             System.out.println("Insufficient funds in the source account.");
         }
+        destinationAccount.setBalance(0);
         sourceAccount.deductAmount(amount);
         destinationAccount.deposit(sourceAccount.deductAmount(amount));
 

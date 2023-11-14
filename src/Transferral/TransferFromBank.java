@@ -2,10 +2,8 @@ package Transferral;
 
 import Account.BankAccount;
 import Account.IAccount;
-import Account.InstapayAccount;
-import Account.WalletAccount;
 
-public class TransferToBank implements ITransferStrategy{
+public class TransferFromBank implements ITransferStrategy{
     @Override
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate source account and destination account types
