@@ -11,6 +11,10 @@ import java.util.List;
 
 public class BankAccount implements IAccount{
     private double balance;
+    public BankAccount(double initialbalance)
+    {
+        this.balance=initialbalance;
+    }
     @Override
     public double getBalance() {
         return balance;
@@ -62,16 +66,17 @@ public class BankAccount implements IAccount{
         if (balance >= amount) {
             balance -= amount;
             System.out.println("Deduction successful. Remaining balance: " + balance);
-
+            return amount;
         }
 
-        return 0;
+      return 0;
     }
+
 
     @Override
     public void deposit(double amount) {
         balance += amount;
-        System.out.println("Deposited $" + amount + " into Bank Account. New balance: $" + balance);
+        System.out.println("Deposited $" + amount + " into Bank Account. New balance: $" + getBalance());
     }
 
     public String getAccountType() {

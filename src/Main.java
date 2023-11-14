@@ -3,8 +3,7 @@ import Account.InstapayAccount;
 import Account.WalletAccount;
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
-import User.BankUser;
-import User.WalletUser;
+import User.*;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
@@ -20,18 +19,21 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         WalletAccount w = new WalletAccount();
-        BankAccount b = new BankAccount();
+        BankAccount b = new BankAccount(0.0);
         InstapayAccount i = new InstapayAccount();
         int billAmount;
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
         List<Wallet> Wallets = WalletDummyFactory.createWallets();
 
+        IUserFactory bankuserFactory=new BankUserFactory();
+        IUserFactory walletUserFactory=new WalletUserFactory();
+
 
         boolean exit = false;
         boolean exitinner=false;
-        BankUser bankUser = null;
-        WalletUser walletUser = null;
+        User bankUser = null;
+        User walletUser = null;
         int amountToBeTransferred;
         int amountToBeDeposited;
         String destinationAccountNumber;
@@ -52,11 +54,11 @@ public class Main {
 
                 switch (choice) {
                     case 1:
-                        bankUser = new BankUser(null, null, null, null, null, b);
+                         bankUser=bankuserFactory.createUser(null,null);
                         System.out.println("Bank User Sign-Up:");
-                        bankUser.signUp(banks);
-                        bankUsers.add(bankUser);
-                        
+                        ((BankUser) bankUser).signUp(banks,b);
+                        bankUsers.add((BankUser) bankUser);
+
                         break;
                     case 2:
 
@@ -66,7 +68,7 @@ public class Main {
                             bankUser.signIn();
                             if (bankUsers.contains(bankUser)) {
                                 System.out.println("User authenticated successfully.");
-                                bankUser.displayAccountDetails();
+                                ((BankUser) bankUser).displayAccountDetails();
                                 while (!exitinner) {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
@@ -107,13 +109,13 @@ public class Main {
                                             System.out.println("Enter the amount you want to deposit");
                                             amountToBeDeposited=scanner.nextInt();
                                             b.deposit(amountToBeDeposited);
-                                            System.out.println("your new balance is $ "+bankUser.getBalance());
+                                            System.out.println("your new balance is $ "+b.getBalance());
                                             break;
                                         case 5:
-                                            System.out.println("Your current account balance is $ "+ bankUser.getBalance());
+                                            System.out.println("Your current account balance is $ "+ b.getBalance());
                                             break;
                                         case 6:
-                                            bankUser.chooseAndPayBill();
+                                            ((BankUser) bankUser).chooseAndPayBill();
                                             break;
                                         case 7:
 
@@ -136,17 +138,18 @@ public class Main {
 
                         break;
                     case 3:
-                        walletUser = new WalletUser(null, null, null, null,w);
+                        walletUser=walletUserFactory.createUser(null,null);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp(Wallets);
+                        ((WalletUser) walletUser).signUp(Wallets);
+                        walletUsers.add ((WalletUser) walletUser);
                         break;
                     case 4:
-                        if (walletUser != null) {
+
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
-                            walletUser.displayAccountDetails();
+                        ((WalletUser) walletUser).displayAccountDetails();
 
-                            if (walletUser.isAuthenticated()) {
+                            if (walletUsers.contains(walletUser)) {
                                 while (!exit) {
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
@@ -179,7 +182,7 @@ public class Main {
                                             System.out.println("Your current account balance is $ "+ walletUser.getBalance());
                                             break;
                                         case 5:
-                                            walletUser.chooseAndPayBill();
+                                            ((WalletUser) walletUser).chooseAndPayBill();
                                             break;
                                         case 6:
 
@@ -187,9 +190,7 @@ public class Main {
 
                                     }
                                 }
-                            } else {
-                                System.out.println("Wallet User authentication failed. Returning to Main Menu.");
-                            }
+
                         } else {
                             System.out.println("Wallet User is not signed up.");
                         }

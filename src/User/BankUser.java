@@ -1,6 +1,8 @@
 package User;
 
+import Account.BankAccount;
 import Account.IAccount;
+import Account.IAccountFactory;
 import BillPaymentStrategy.ElectricityBill;
 import BillPaymentStrategy.GasBill;
 import BillPaymentStrategy.IBill;
@@ -18,16 +20,15 @@ public class BankUser extends User {
     private String bankName;
     private String bankAccount;
     private String mobileNumber;
-    private static List<BankUser> signedUpUsers = new ArrayList<>();
 
     List<IBill> bills = BankUserBills.initializeBills();
 
 
-    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
-        super(username, password, Account);
-        this.bankName = bankName;
-        this.bankAccount = bankAccount;
-        this.mobileNumber = mobileNumber;
+    public BankUser(String username, String password, IAccountFactory accountFactory) {
+        super(username, password, accountFactory.createAccount());
+        this.bankName = getBankName();  // You can set default values or get them as parameters if needed
+        this.bankAccount = getBankAccount();
+        this.mobileNumber = getMobileNumber();
     }
 
     public String getBankName() {
@@ -47,8 +48,7 @@ public class BankUser extends User {
 
     public double getBalance() {
         return getAccount().getBalance();
-    }
-    public String getBankAccount()
+    }    public String getBankAccount()
     {
         return bankAccount;
     }
@@ -60,7 +60,7 @@ public class BankUser extends User {
 
 
 
-    public void signUp(List<Bank> banks) {
+    public void signUp(List<Bank> banks, BankAccount b) {
         if (getUsername() == null) {
             Scanner scanner = new Scanner(System.in);
 
@@ -176,17 +176,20 @@ public class BankUser extends User {
 
             // Check if the bill is already paid
             if (!selectedBill.isPaid()) {
+                double userBalance = getBalance();
+                double billAmount = selectedBill.getAmount();
+
+                System.out.println("User Balance: $" + userBalance);
+                System.out.println("Bill Amount: $" + billAmount);
                 // Display the details of the selected bill
-
-
                 // Prompt the user to confirm the payment
                 System.out.print("Do you want to pay this bill? (yes/no): ");
                 String confirmation = scanner.next().toLowerCase();
 
                 if (confirmation.equals("yes")) {
-                    if (getBalance() >= selectedBill.getAmount()) {
+                    if (this.getBalance() >= selectedBill.getAmount()) {
                         // Pay the bill
-                        payBill(selectedBill);
+                        this.payBill(selectedBill);
                         System.out.println("----------------------------------");
 
                         List<IBill> updatedBills = new ArrayList<>(bills);
