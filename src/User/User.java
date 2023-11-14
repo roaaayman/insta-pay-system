@@ -51,7 +51,6 @@ public abstract class User {
         enteredPassword = scanner.nextLine();
     }
 
-    public abstract void payBill(IBill bill);
 
     public IAccount getAccount() {
         return account;

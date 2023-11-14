@@ -3,7 +3,11 @@ import Account.InstapayAccount;
 import Account.WalletAccount;
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
+import BillData.BankUserBills;
+import BillData.WalletUserBills;
+import BillPaymentStrategy.IBill;
 import User.BankUser;
+import User.BillPaymentService;
 import User.WalletUser;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
@@ -15,6 +19,8 @@ import java.util.Scanner;
 public class Main {
     private static List<BankUser> bankUsers = new ArrayList<>();
     private static List<WalletUser> walletUsers = new ArrayList<>();
+
+
 
     public static void main(String[] args) {
 
@@ -113,7 +119,8 @@ public class Main {
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
                                         case 6:
-                                            bankUser.chooseAndPayBill();
+                                            List<IBill> bankbills = BankUserBills.initializeBills();
+                                            BillPaymentService.chooseAndPayBill(bankbills,bankUser.getBalance(),bankUser.getBankAccount(),bankUser);
                                             break;
                                         case 7:
 
@@ -179,7 +186,8 @@ public class Main {
                                             System.out.println("Your current account balance is $ "+ walletUser.getBalance());
                                             break;
                                         case 5:
-                                            walletUser.chooseAndPayBill();
+                                            List<IBill> walletbills = WalletUserBills.initializeBills();
+                                            BillPaymentService.chooseAndPayBill(walletbills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
                                             break;
                                         case 6:
 
