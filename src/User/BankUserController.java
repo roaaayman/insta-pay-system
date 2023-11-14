@@ -35,6 +35,8 @@ public class BankUserController {
 
                 System.out.println("Account Available in bank " + bankUser.getBankName());
                 System.out.println("----------------------------------");
+                System.out.println("----------------------------------");
+                loadDetails();
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
@@ -84,6 +86,17 @@ public class BankUserController {
 
         setBankinfo(bankuser,username,password,bankname,bankacc,mobileNumber);
 
+    }
+    public void loadDetails()
+    {
+        System.out.println("Wallet user signed up successfully.");
+        System.out.println("----------------------------------");
+        System.out.println("Your Profile");
+        System.out.println("Username: " + bankuser.getUsername());
+        System.out.println("Password: " + bankuser.getPassword());
+        System.out.println("bank Name: " + bankuser.getBankName());
+        System.out.println("account Number associated with the bank: " + bankuser.getBankAccount());
+        System.out.println("mobile number: " + bankuser.getMobileNumber());
     }
 
 
