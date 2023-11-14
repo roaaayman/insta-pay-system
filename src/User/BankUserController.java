@@ -27,29 +27,16 @@ public class BankUserController {
         System.out.println("Signing up Bank user...");
 
         if (bankUser.getUsername() == null) {
-            System.out.print("Enter Username: ");
-            String username = scanner.nextLine();
-
-            System.out.print("Enter Password: ");
-            String password = scanner.nextLine();
-
-            System.out.print("Enter Bank Name: ");
-            String bankName = scanner.nextLine();
-
-            System.out.print("Enter Bank Account (as a string): ");
-            String bankAccount = scanner.nextLine();
-
-            System.out.print("Enter Mobile Number: ");
-            String mobileNumber = scanner.nextLine();
+            promptUserForDetails(bankUser);
 
             BankVerificationStrategy bankv = new BankVerificationStrategy();
 
-            if (bankv.isBankValid(bankName, bankAccount, banks)) {
+            if (bankv.isBankValid(bankUser.getBankName(), bankUser.getBankAccount(), banks)) {
 
-                System.out.println("Account Available in bank " + bankName);
+                System.out.println("Account Available in bank " + bankUser.getBankName());
                 System.out.println("----------------------------------");
 
-                boolean verified = bankv.verifyOTP(mobileNumber);
+                boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
                     System.out.println("Bank user signed up successfully.");
                     System.out.println("----------------------------------");
@@ -73,6 +60,33 @@ public class BankUserController {
             System.out.println("Bank user is already registered.");
         }
     }
+    private void promptUserForDetails( BankInstaPayUser bankuser) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Signing up Wallet user...");
+
+        // Prompt the user for username
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+
+        // Prompt the user for password
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+        System.out.print("Enter bank name: ");
+        String bankname = scanner.nextLine();
+        System.out.print("Enter bank account number: ");
+        String bankacc = scanner.nextLine();
+
+        // Prompt the user for the mobile number
+        System.out.print("Enter Mobile Number: ");
+        String mobileNumber = scanner.nextLine();
+
+
+        setBankinfo(bankuser,username,password,bankname,bankacc,mobileNumber);
+
+    }
+
+
 
     public void displayAccountDetails(BankInstaPayUser user) {
         System.out.println("Account Details:");
