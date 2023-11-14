@@ -6,7 +6,9 @@ import BillPaymentStrategy.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankUserBills {
+public class BankUserBills  {
+
+
     public static List<IBill> initializeBills() {
         List<IBill> bills = new ArrayList<>();
 

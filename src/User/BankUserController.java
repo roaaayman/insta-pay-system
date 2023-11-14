@@ -8,10 +8,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BankUserController {
+    BankInstaPayUser bankuser;
     private static List<BankInstaPayUser> signedUpUsers = new ArrayList<>();
 
+    public void setBankinfo(BankInstaPayUser bankacc, String username, String password, String bankName, String bankAccount,String mobilenumber)
+    {
+        bankuser=bankacc;
+        bankuser.setPassword(password);
+        bankuser.setUsername(username);
+        bankuser.setMobileNumber(mobilenumber);
+        bankuser.setBankAccount(bankAccount);
+        bankuser.setBankName(bankName);
+    }
     public void signUpBankUser(List<Bank> banks, BankInstaPayUser bankUser) {
         Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Signing up Bank user...");
 
@@ -34,11 +45,6 @@ public class BankUserController {
             BankVerificationStrategy bankv = new BankVerificationStrategy();
 
             if (bankv.isBankValid(bankName, bankAccount, banks)) {
-                bankUser.setUsername(username);
-                bankUser.setPassword(password);
-                bankUser.setBankName(bankName);
-                bankUser.setBankAccount(bankAccount);
-                bankUser.setMobileNumber(mobileNumber);
 
                 System.out.println("Account Available in bank " + bankName);
                 System.out.println("----------------------------------");

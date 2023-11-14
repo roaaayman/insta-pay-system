@@ -1,9 +1,10 @@
-package User;
+package BillPaymentStrategy;
 
 import BillPaymentStrategy.ElectricityBill;
 import BillPaymentStrategy.GasBill;
 import BillPaymentStrategy.IBill;
 import BillPaymentStrategy.WaterBill;
+import User.InstaPayUser;
 
 import java.util.ArrayList;
 import java.util.List;
