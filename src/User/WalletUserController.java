@@ -4,15 +4,15 @@ import Account.IAccount;
 import Account.WalletAccount;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.IBill;
-import VerificationService.WalletVerification;
+import VerificationService.WalletVerificationStrategy;
 import WalletUserData.Wallet;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class WalletUserController {
-    WalletUser walletuser;
-    public void setWalletinfo(WalletUser wallet,String username,String password, String mobilenumber,String walletPRovider)
+    WalletInstaPayUser walletuser;
+    public void setWalletinfo(WalletInstaPayUser wallet, String username, String password, String mobilenumber, String walletPRovider)
     {
         walletuser=wallet;
         walletuser.setPassword(password);
@@ -21,9 +21,11 @@ public class WalletUserController {
         walletuser.setWalletProvider(walletPRovider);
     }
     List<IBill> bills = WalletUserBills.initializeBills();
-    public void signUp(List<Wallet> Wallets,WalletUser walletuser) {
+    public void signUp(List<Wallet> Wallets, WalletInstaPayUser walletuser) {
         if (walletuser.getUsername() == null) {
-            WalletVerification walletv = new WalletVerification();
+            promptUserForDetails(walletuser);
+
+            WalletVerificationStrategy walletv = new WalletVerificationStrategy();
             if (walletv.isWalletValid(walletuser.getWalletProvider(), walletuser.getMobileNumber(),Wallets)) {
                 walletuser.setUsername(walletuser.getUsername());
                 walletuser.setPassword(walletuser.getPassword());
@@ -34,7 +36,7 @@ public class WalletUserController {
 
                 boolean verified = walletv.verifyOTP(walletuser.getMobileNumber());
                 if (verified) {
-                    // Further processing if needed
+
                 } else {
                     System.out.println("OTP verification failed. Wallet user not signed up.");
                 }
@@ -46,6 +48,31 @@ public class WalletUserController {
             System.out.println("Wallet user is already registered.");
         }
     }
+    private void promptUserForDetails( WalletInstaPayUser walletuser) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Signing up Wallet user...");
+
+        // Prompt the user for username
+        System.out.print("Enter Username: ");
+        String username = scanner.nextLine();
+
+        // Prompt the user for password
+        System.out.print("Enter Password: ");
+        String password = scanner.nextLine();
+
+        // Prompt the user for the mobile number
+        System.out.print("Enter Mobile Number: ");
+        String mobileNumber = scanner.nextLine();
+
+        System.out.print("Enter Wallet Provider: ");
+        String WalletProvider = scanner.nextLine();
+
+        setWalletinfo(walletuser,username,password,mobileNumber,WalletProvider);
+
+    }
+
+
     public void loadDetails()
     {
         System.out.println("Wallet user signed up successfully.");
@@ -57,11 +84,7 @@ public class WalletUserController {
         System.out.println("Mobile Number associated with the wallet: " + walletuser.getMobileNumber());
     }
 
-    private static WalletUser createWalletUser(String username, String password, String mobileNumber, String walletProvider) {
-        // You can customize the creation of the WalletUser instance here, for example, using a factory
-        IAccount walletAccount = new WalletAccount(); // Replace with your logic to create a wallet account
-        return new WalletUser(username, password, mobileNumber, walletProvider, walletAccount);
-    }
+
 
 
     public void displayAccountDetails() {

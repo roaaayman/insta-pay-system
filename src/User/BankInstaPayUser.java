@@ -1,29 +1,21 @@
 package User;
 
 import Account.IAccount;
-import BillPaymentStrategy.ElectricityBill;
-import BillPaymentStrategy.GasBill;
-import BillPaymentStrategy.IBill;
-import BankDummydata.Bank;
-import BillPaymentStrategy.WaterBill;
-import VerificationService.BankVerification;
-import BillData.BankUserBills;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class BankUser extends User {
+public class BankInstaPayUser extends InstaPayUser {
     private String bankName;
     private String bankAccount;
     private String mobileNumber;
-    private static List<BankUser> signedUpUsers = new ArrayList<>();
+    private static List<BankInstaPayUser> signedUpUsers = new ArrayList<>();
 
    // List<IBill> bills = BankUserBills.initializeBills();
 
 
-    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
+    public BankInstaPayUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
         super(username, password, Account);
         this.bankName = bankName;
         this.bankAccount = bankAccount;

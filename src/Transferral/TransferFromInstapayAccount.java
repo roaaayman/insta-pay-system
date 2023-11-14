@@ -1,11 +1,10 @@
 package Transferral;
 
-import Account.BankAccount;
 import Account.IAccount;
 import Account.InstapayAccount;
 import Account.WalletAccount;
 
-public class TransferToInstapayAccount implements ITransferStrategy {
+public class TransferFromInstapayAccount implements ITransferStrategy {
     @Override
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate destination account type
@@ -17,6 +16,7 @@ public class TransferToInstapayAccount implements ITransferStrategy {
         if (sourceAccount.getBalance() < amount) {
             throw new IllegalStateException("Insufficient funds in the source account.");
         }
+
 
         // Implement logic for transferring to another Instapay account
         // You may need to update the account balances

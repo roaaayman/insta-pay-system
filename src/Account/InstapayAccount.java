@@ -1,8 +1,6 @@
 package Account;
 
-import Transferral.ITransferStrategy;
-import Transferral.TransferToBank;
-import Transferral.TransferToInstapayAccount;
+import Transferral.TransferFromInstapayAccount;
 import Transferral.TransferToWallet;
 
 public class InstapayAccount implements IAccount{
@@ -43,8 +41,8 @@ public class InstapayAccount implements IAccount{
         }
         else if(destAcc instanceof  InstapayAccount)
         {
-            TransferToInstapayAccount transferToInstapayAccount=new TransferToInstapayAccount();
-            transferToInstapayAccount.transfer(this,destAcc,amount,destAccountNumber);
+            TransferFromInstapayAccount transferFromInstapayAccount =new TransferFromInstapayAccount();
+            transferFromInstapayAccount.transfer(this,destAcc,amount,destAccountNumber);
 
         }
         else {

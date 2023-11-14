@@ -1,16 +1,16 @@
 package User;
 
 import BankDummydata.Bank;
-import VerificationService.BankVerification;
+import VerificationService.BankVerificationStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class BankUserController {
-    private static List<BankUser> signedUpUsers = new ArrayList<>();
+    private static List<BankInstaPayUser> signedUpUsers = new ArrayList<>();
 
-    public void signUpBankUser(List<Bank> banks, BankUser bankUser) {
+    public void signUpBankUser(List<Bank> banks, BankInstaPayUser bankUser) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Signing up Bank user...");
@@ -31,7 +31,7 @@ public class BankUserController {
             System.out.print("Enter Mobile Number: ");
             String mobileNumber = scanner.nextLine();
 
-            BankVerification bankv = new BankVerification();
+            BankVerificationStrategy bankv = new BankVerificationStrategy();
 
             if (bankv.isBankValid(bankName, bankAccount, banks)) {
                 bankUser.setUsername(username);
@@ -68,7 +68,7 @@ public class BankUserController {
         }
     }
 
-    public void displayAccountDetails(BankUser user) {
+    public void displayAccountDetails(BankInstaPayUser user) {
         System.out.println("Account Details:");
         System.out.println("Bank Name: " + user.getBankName());
         System.out.println("Bank Account: " + user.getBankAccount());

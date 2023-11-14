@@ -6,10 +6,7 @@ import BankDummydata.DummyBankFactory;
 import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.IBill;
-import User.BankUser;
-import User.BankUserController;
-import User.BillPaymentService;
-import User.WalletUser;
+import User.*;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
@@ -18,8 +15,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static List<BankUser> bankUsers = new ArrayList<>();
-    private static List<WalletUser> walletUsers = new ArrayList<>();
+    private static List<BankInstaPayUser> bankUsers = new ArrayList<>();
+    private static List<WalletInstaPayUser> walletUsers = new ArrayList<>();
 
 
 
@@ -34,12 +31,13 @@ public class Main {
         List<Bank> banks = DummyBankFactory.createBanks();
         List<Wallet> Wallets = WalletDummyFactory.createWallets();
         BankUserController bankUserController = new BankUserController();
+        WalletUserController walletUserController=new WalletUserController();
 
 
         boolean exit = false;
         boolean exitinner=false;
-        BankUser bankUser = null;
-        WalletUser walletUser = null;
+        BankInstaPayUser bankUser = null;
+        WalletInstaPayUser walletUser = null;
         int amountToBeTransferred;
         int amountToBeDeposited;
         String destinationAccountNumber;
@@ -60,7 +58,7 @@ public class Main {
 
                 switch (choice) {
                     case 1:
-                        bankUser = new BankUser(null, null, null, null, null, b);
+                        bankUser = new BankInstaPayUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
                         bankUserController.signUpBankUser(banks,bankUser);
                         bankUsers.add(bankUser);
@@ -145,16 +143,16 @@ public class Main {
 
                         break;
                     case 3:
-                        walletUser = new WalletUser(null, null, null, null,w);
+                        walletUser = new WalletInstaPayUser(null, null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp(Wallets);
+                        walletUserController.signUp(Wallets,walletUser);
+
                         break;
                     case 4:
-                        if (walletUser != null) {
+
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
-                            walletUser.displayAccountDetails();
-
+                            walletUserController.displayAccountDetails();
                             if (walletUsers.contains(walletUser)) {
                                 while (!exit) {
                                     System.out.println("Wallet User Menu");
@@ -200,9 +198,7 @@ public class Main {
                             } else {
                                 System.out.println("Wallet User authentication failed. Returning to Main Menu.");
                             }
-                        } else {
-                            System.out.println("Wallet User is not signed up.");
-                        }
+
                         break;
                     case 5:
                         exit = true;

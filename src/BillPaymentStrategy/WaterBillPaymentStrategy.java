@@ -1,13 +1,13 @@
 package BillPaymentStrategy;
 
-import User.User;
+import User.InstaPayUser;
 
 public class WaterBillPaymentStrategy implements IBIllPaymentStrategy{
 
     @Override
-    public void payBill(IBill bill,User user) {
-        System.out.println("Paying Water Bill of $" + bill.getAmount() + " for user: " + user.getUsername());
-        user.getAccount().deductAmount(bill.getAmount());
+    public void payBill(IBill bill, InstaPayUser instaPayUser) {
+        System.out.println("Paying Water Bill of $" + bill.getAmount() + " for user: " + instaPayUser.getUsername());
+        instaPayUser.getAccount().deductAmount(bill.getAmount());
         bill.markAsPaid();
     }
 }

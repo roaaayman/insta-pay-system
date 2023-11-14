@@ -2,7 +2,7 @@ package Account;
 
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
-import Transferral.TransferToBank;
+import Transferral.TransferFromBank;
 import Transferral.TransferToWallet;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
@@ -42,8 +42,8 @@ public class BankAccount implements IAccount{
             for (Bank bank : banks) {
                 if (bank.getBankAccount().equals(destAccountNumber)) {
                     isValidDestination = true;
-                    TransferToBank transferToBank = new TransferToBank();
-                    transferToBank.transfer(this, destAcc, amount, destAccountNumber);
+                    TransferFromBank transferFromBank = new TransferFromBank();
+                    transferFromBank.transfer(this, destAcc, amount, destAccountNumber);
                     break;
                 }
             }
