@@ -7,9 +7,9 @@ import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.IBill;
 import User.BankUser;
+import User.BankUserController;
 import User.BillPaymentService;
 import User.WalletUser;
-import User.WalletUserController;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
@@ -33,7 +33,7 @@ public class Main {
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
         List<Wallet> Wallets = WalletDummyFactory.createWallets();
-        WalletUserController walletusercontroller=new WalletUserController();
+        BankUserController bankUserController = new BankUserController();
 
 
         boolean exit = false;
@@ -62,7 +62,7 @@ public class Main {
                     case 1:
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
-                        bankUser.signUp(banks);
+                        bankUserController.signUpBankUser(banks,bankUser);
                         bankUsers.add(bankUser);
                         
                         break;
@@ -74,7 +74,7 @@ public class Main {
                             bankUser.signIn();
                             if (bankUsers.contains(bankUser)) {
                                 System.out.println("User authenticated successfully.");
-                                bankUser.displayAccountDetails();
+                                bankUserController.displayAccountDetails(bankUser);
                                 while (!exitinner) {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
@@ -147,13 +147,13 @@ public class Main {
                     case 3:
                         walletUser = new WalletUser(null, null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletusercontroller.signUp(Wallets);
+                        walletUser.signUp(Wallets);
                         break;
                     case 4:
                         if (walletUser != null) {
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
-                            walletusercontroller.displayAccountDetails();
+                            walletUser.displayAccountDetails();
 
                             if (walletUsers.contains(walletUser)) {
                                 while (!exit) {
