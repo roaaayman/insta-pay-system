@@ -1,54 +1,68 @@
-package User;
+package InstaPayuser;
 
 import Account.IAccount;
 import Bill.ElectricityBill;
 import Bill.GasBill;
 import Bill.IBill;
+import BankDummydata.Bank;
 import Bill.WaterBill;
+import VerificationService.BankVerification;
 import BillData.BankUserBills;
-import BillData.WalletUserBills;
-import VerificationService.WalletVerification;
-import WalletUserData.Wallet;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class WalletUser extends User {
+public class BankUser extends User {
+    private String bankName;
+    private String bankAccount;
     private String mobileNumber;
-    private String WalletProvider;
-    List<IBill> bills = WalletUserBills.initializeBills();
+    List<IBill> bills = BankUserBills.initializeBills();
 
 
-    public WalletUser(String username, String password, String mobileNumber, String WalletProvider, IAccount Account) {
+    public BankUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {
         super(username, password, Account);
+        this.bankName = bankName;
+        this.bankAccount = bankAccount;
         this.mobileNumber = mobileNumber;
     }
 
-    public double getBalance() {
-        return getAccount().getBalance();
+    public String getBankName() {
+        return bankName;
+    }
+    public void setBankName(String bankname) {
+        bankName=bankname;
     }
 
     public String getMobileNumber() {
         return mobileNumber;
     }
-    public String getWalletProvider() {
-        return WalletProvider;
-    }
-    public void setWalletProvider(String Walletprovider) {
-        Walletprovider=Walletprovider;
-    }
-
-
     public void setMobileNumber(String mobnum) {
         mobileNumber=mobnum;
     }
 
-    public void signUp(List<Wallet> Wallets) {
+
+    public double getBalance() {
+        return getAccount().getBalance();
+    }
+    public String getBankAccount()
+    {
+        return bankAccount;
+    }
+    public void setBankAccount(String bankaccount)
+    {
+        bankAccount=bankaccount;
+    }
+
+
+
+
+    public void signUp(List<Bank> banks) {
         if (getUsername() == null) {
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Signing up Wallet user...");
+            System.out.println("Signing up Bank user...");
 
             // Prompt the user for username
             System.out.print("Enter Username: ");
@@ -58,71 +72,94 @@ public class WalletUser extends User {
             System.out.print("Enter Password: ");
             String password = scanner.nextLine();
 
+            // Prompt the user for the bank name
+            System.out.print("Enter Bank Name: ");
+            String bankName = scanner.nextLine();
+
+            // Prompt the user for the bank account details as a string
+            System.out.print("Enter Bank Account (as a string): ");
+            String bankAccount = scanner.nextLine();
+
             // Prompt the user for the mobile number
             System.out.print("Enter Mobile Number: ");
-            mobileNumber = scanner.nextLine();
-
-            System.out.print("Enter Wallet Provider: ");
-            WalletProvider = scanner.nextLine();
+            String mobileNumber = scanner.nextLine();
             setUsername(username);
             setPassword(password);
-            setWalletProvider(WalletProvider);
+            setBankName(bankName);
+            setBankAccount(bankAccount);
             setMobileNumber(mobileNumber);
 
-            if (isWalletValid(WalletProvider, mobileNumber, Wallets)) {
+            // Check if the entered bank details exist in the list
+            if (isBankValid(bankName, bankAccount, banks)) {
                 setUsername(username);
                 setPassword(password);
 
-                System.out.println("Account Available in Wallet provider "+WalletProvider);
+                System.out.println("Account Available in bank "+bankName);
                 System.out.println("----------------------------------");
 
 
 
-                WalletVerification walletv = new WalletVerification();
-                boolean verified = walletv.verifyOTP(mobileNumber);
+                BankVerification bankv = new BankVerification();
+                boolean verified = bankv.verifyOTP(mobileNumber);
                 if (verified) {
-                    System.out.println("Wallet user signed up successfully.");
+                    System.out.println("Bank user signed up successfully.");
                     System.out.println("----------------------------------");
                     System.out.println("Your Profile");
+
                     System.out.println("Username: " + getUsername());
                     System.out.println("Password: " + getPassword());
-                    System.out.println("Wallet Provider Name: " + WalletProvider);
-                    System.out.println("Mobile Number associated with the wallet: " + mobileNumber);
+                    System.out.println("Bank Name: " + bankName);
+                    System.out.println("Bank Account: " + bankAccount);
+                    System.out.println("Mobile Number: " + mobileNumber);
+                    System.out.println("----------------------------------");
+
+
                 } else {
-                    System.out.println("OTP verification failed. Wallet user not signed up.");
+                    System.out.println("OTP verification failed. Bank user not signed up.");
                 }
             } else {
-                System.out.println("Invalid Wallet details. Wallet user not signed up.");
+                System.out.println("Invalid bank details. Bank user not signed up.");
             }
 
         } else {
-            System.out.println("Wallet user is already registered.");
+            System.out.println("Bank user is already registered.");
         }
+
     }
 
-    private boolean isWalletValid(String WalletProvider, String MobileNumber, List<Wallet> wallets) {
-        for (Wallet wallet : wallets) {
-            if (wallet.getWalletProvider().equalsIgnoreCase(WalletProvider) && wallet.getMobileNumber().equals(MobileNumber)) {
-                return true; // Wallet details are valid
+    // Method to check if the entered bank details exist in the list
+    private boolean isBankValid(String bankName, String bankAccount, List<Bank> banks) {
+        for (Bank bank : banks) {
+            if (bank.getBankName().equalsIgnoreCase(bankName) && bank.getBankAccount().equals(bankAccount)) {
+                return true; // Bank details are valid
             }
         }
-        return false; // Wallet details are not found in the list
+        return false; // Bank details are not found in the list
     }
     public void checkBills(List<IBill> bills) {
+        // Check bills associated with the user's account number
         for (IBill bill : bills) {
-            if (bill.getAccountNumber().equals(mobileNumber)) {
-                if (bill instanceof GasBill) {
-                    System.out.println("You have a Gas bill with amount $" + bill.getAmount());
-                } else if (bill instanceof WaterBill) {
-                    System.out.println("You have a Water bill with amount $" + bill.getAmount());
-                } else if (bill instanceof ElectricityBill) {
-                    System.out.println("You have an Electricity bill with amount $" + bill.getAmount());
+            if (bill.getAccountNumber().equals(bankAccount)) {
+                if (bill.isPaid()) {
+                    // Bill has already been paid
+                    System.out.println("You have already paid a bill with amount $" + bill.getAmount());
                 } else {
-                    System.out.println("You have a bill with amount $" + bill.getAmount());
+                    // Bill is unpaid
+                    if (bill instanceof GasBill) {
+                        System.out.println("You have an unpaid Gas bill with amount $" + bill.getAmount());
+                    } else if (bill instanceof WaterBill) {
+                        System.out.println("You have an unpaid Water bill with amount $" + bill.getAmount());
+                    } else if (bill instanceof ElectricityBill) {
+                        System.out.println("You have an unpaid Electricity bill with amount $" + bill.getAmount());
+                    } else {
+                        System.out.println("You have an unpaid bill with amount $" + bill.getAmount());
+                    }
                 }
             }
         }
     }
+
+    // Add this method to the BankUser class
     public void chooseAndPayBill() {
         Scanner scanner = new Scanner(System.in);
 
@@ -180,22 +217,28 @@ public class WalletUser extends User {
     }
 
 
+
+
+
     @Override
     public void payBill(IBill bill) {
-        // Implement bill payment logic for wallet user
+        // Implement bill payment logic for bank user
         bill.payBill(this);
     }
 
     // Method to display account details
     public void displayAccountDetails() {
         System.out.println("Account Details:");
+        System.out.println("Bank Name: " + getBankName());
+        System.out.println("Bank Account: " + getBankAccount());
         System.out.println("Mobile Number: " + getMobileNumber());
-        System.out.println("Wallet Provider: " + getWalletProvider());
-        System.out.println("Balance: $" + getBalance());
+        System.out.println("Balance: $" + getAccount().getBalance());
         if (bills != null) {
             checkBills(bills);
+            System.out.println("----------------------------------");
         } else {
             System.out.println("No bills available.");
+            System.out.println("----------------------------------");
         }
     }
 }

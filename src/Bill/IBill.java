@@ -1,6 +1,6 @@
 package Bill;
 
-import User.User;
+import InstaPayuser.User;
 
 
 public interface IBill {

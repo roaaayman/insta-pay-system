@@ -1,6 +1,6 @@
 package Bill;
 
-import User.User;
+import InstaPayuser.User;
 
 public class GasBill implements IBill {
     private double amount;
