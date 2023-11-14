@@ -7,6 +7,7 @@ import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.IBill;
 import User.BankUser;
+import User.BankUserController;
 import User.BillPaymentService;
 import User.WalletUser;
 import WalletUserData.Wallet;
@@ -32,6 +33,7 @@ public class Main {
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
         List<Wallet> Wallets = WalletDummyFactory.createWallets();
+        BankUserController bankUserController = new BankUserController();
 
 
         boolean exit = false;
@@ -60,7 +62,7 @@ public class Main {
                     case 1:
                         bankUser = new BankUser(null, null, null, null, null, b);
                         System.out.println("Bank User Sign-Up:");
-                        bankUser.signUp(banks);
+                        bankUserController.signUpBankUser(banks,bankUser);
                         bankUsers.add(bankUser);
                         
                         break;
@@ -72,7 +74,7 @@ public class Main {
                             bankUser.signIn();
                             if (bankUsers.contains(bankUser)) {
                                 System.out.println("User authenticated successfully.");
-                                bankUser.displayAccountDetails();
+                                bankUserController.displayAccountDetails(bankUser);
                                 while (!exitinner) {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
