@@ -1,6 +1,7 @@
 package User;
 
 import Account.IAccount;
+import Account.IAccountFactory;
 import BillPaymentStrategy.ElectricityBill;
 import BillPaymentStrategy.GasBill;
 import BillPaymentStrategy.IBill;
@@ -19,10 +20,12 @@ public class WalletUser extends User {
     List<IBill> bills = WalletUserBills.initializeBills();
 
 
-    public WalletUser(String username, String password, String mobileNumber, String WalletProvider, IAccount Account) {
-        super(username, password, Account);
-        this.mobileNumber = mobileNumber;
+    public WalletUser(String username, String password, IAccountFactory accountFactory) {
+        super(username, password, accountFactory.createAccount());
+        this.mobileNumber = getMobileNumber();
+        this.WalletProvider=getWalletProvider();
     }
+
 
     public double getBalance() {
         return getAccount().getBalance();
