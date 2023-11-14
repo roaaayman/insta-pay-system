@@ -153,7 +153,7 @@ public class Main {
                             walletUser.signIn();
                             walletUser.displayAccountDetails();
 
-                            if (walletUser.isAuthenticated()) {
+                            if (walletUsers.contains(walletUser)) {
                                 while (!exit) {
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
