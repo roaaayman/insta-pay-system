@@ -16,46 +16,13 @@ public class BankUserController {
         System.out.println("Signing up Bank user...");
 
         if (bankUser.getUsername() == null) {
-            System.out.print("Enter Username: ");
-            String username = scanner.nextLine();
-
-            System.out.print("Enter Password: ");
-            String password = scanner.nextLine();
-
-            System.out.print("Enter Bank Name: ");
-            String bankName = scanner.nextLine();
-
-            System.out.print("Enter Bank Account (as a string): ");
-            String bankAccount = scanner.nextLine();
-
-            System.out.print("Enter Mobile Number: ");
-            String mobileNumber = scanner.nextLine();
+            getUserDetails(scanner, bankUser);
 
             BankVerification bankv = new BankVerification();
-
-            if (bankv.isBankValid(bankName, bankAccount, banks)) {
-                bankUser.setUsername(username);
-                bankUser.setPassword(password);
-                bankUser.setBankName(bankName);
-                bankUser.setBankAccount(bankAccount);
-                bankUser.setMobileNumber(mobileNumber);
-
-                System.out.println("Account Available in bank " + bankName);
-                System.out.println("----------------------------------");
-
-                boolean verified = bankv.verifyOTP(mobileNumber);
+            if (bankv.isBankValid(bankUser.getBankName(), bankUser.getBankAccount(), banks)) {
+                boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
-                    System.out.println("Bank user signed up successfully.");
-                    System.out.println("----------------------------------");
-                    System.out.println("Your Profile");
-
-                    System.out.println("Username: " + bankUser.getUsername());
-                    System.out.println("Password: " + bankUser.getPassword());
-                    System.out.println("Bank Name: " + bankUser.getBankName());
-                    System.out.println("Bank Account: " + bankUser.getBankAccount());
-                    System.out.println("Mobile Number: " + bankUser.getMobileNumber());
-                    System.out.println("----------------------------------");
-
+                    displayUserInformation(bankUser);
                     signedUpUsers.add(bankUser);
                 } else {
                     System.out.println("OTP verification failed. Bank user not signed up.");
@@ -68,6 +35,36 @@ public class BankUserController {
         }
     }
 
+    private void getUserDetails(Scanner scanner, BankUser bankUser) {
+        System.out.print("Enter Username: ");
+        bankUser.setUsername(scanner.nextLine());
+
+        System.out.print("Enter Password: ");
+        bankUser.setPassword(scanner.nextLine());
+
+        System.out.print("Enter Bank Name: ");
+        bankUser.setBankName(scanner.nextLine());
+
+        System.out.print("Enter Bank Account (as a string): ");
+        bankUser.setBankAccount(scanner.nextLine());
+
+        System.out.print("Enter Mobile Number: ");
+        bankUser.setMobileNumber(scanner.nextLine());
+    }
+
+    private void displayUserInformation(BankUser bankUser) {
+        System.out.println("Bank user signed up successfully.");
+        System.out.println("----------------------------------");
+        System.out.println("Your Profile");
+        System.out.println("Username: " + bankUser.getUsername());
+        System.out.println("Password: " + bankUser.getPassword());
+        System.out.println("Bank Name: " + bankUser.getBankName());
+        System.out.println("Bank Account: " + bankUser.getBankAccount());
+        System.out.println("Mobile Number: " + bankUser.getMobileNumber());
+        System.out.println("----------------------------------");
+    }
+
+
     public void displayAccountDetails(BankUser user) {
         System.out.println("Account Details:");
         System.out.println("Bank Name: " + user.getBankName());
@@ -75,6 +72,6 @@ public class BankUserController {
         System.out.println("Mobile Number: " + user.getMobileNumber());
         System.out.println("Balance: $" + user.getBalance());
 
-        // Additional logic for displaying bills if needed
+
     }
 }
