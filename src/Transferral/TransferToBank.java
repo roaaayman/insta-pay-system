@@ -18,6 +18,7 @@ public class TransferToBank implements ITransferStrategy{
         if (sourceAccount.getBalance() < amount) {
             throw new IllegalStateException("Insufficient funds in the source account.");
         }
+        destinationAccount.setBalance(0);
         sourceAccount.deductAmount(amount);
         destinationAccount.deposit(amount);
         // Implement logic for transferring to different account types

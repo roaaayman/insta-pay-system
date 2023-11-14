@@ -54,13 +54,13 @@ public class InstapayAccount implements IAccount{
 
 
     }
-    public void deductAmount(double amount) {
+    public double deductAmount(double amount) {
         if (balance >= amount) {
             balance -= amount;
             System.out.println("Deduction successful. Remaining balance: " + balance);
         }
+        return amount;
     }
-
     @Override
     public void deposit(double amount) {
         balance += amount;

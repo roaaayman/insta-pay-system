@@ -1,5 +1,8 @@
 package VerificationService;
 
+import WalletUserData.Wallet;
+
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -24,5 +27,13 @@ public class WalletVerification implements IVerification{
 
         // Verify OTP
         return generatedOTP == userEnteredOTP;
+    }
+    public boolean isWalletValid(String WalletProvider, String MobileNumber, List<Wallet> wallets) {
+        for (Wallet wallet : wallets) {
+            if (wallet.getWalletProvider().equalsIgnoreCase(WalletProvider) && wallet.getMobileNumber().equals(MobileNumber)) {
+                return true; // Wallet details are valid
+            }
+        }
+        return false; // Wallet details are not found in the list
     }
 }

@@ -1,4 +1,4 @@
-package Bill;
+package BillPaymentStrategy;
 
 import InstaPayuser.User;
 
@@ -6,7 +6,8 @@ import InstaPayuser.User;
 public interface IBill {
     String getAccountNumber();
     double getAmount();
-    void payBill(User user);
+    public void payBill(User user) ;
+    void markAsPaid();
     boolean isPaid();
 
 }

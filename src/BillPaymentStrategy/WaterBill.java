@@ -1,4 +1,4 @@
-package Bill;
+package BillPaymentStrategy;
 
 import InstaPayuser.User;
 
@@ -6,14 +6,12 @@ public class WaterBill implements IBill {
     private double amount;
     private String accountNumber;
     private boolean paid = false;
+    private IBIllPaymentStrategy paymentStrategy;
 
-    @Override
-    public boolean isPaid() {
-        return paid;
-    }
-    public WaterBill(String accountNumber, double amount) {
+    public WaterBill(String accountNumber, double amount, IBIllPaymentStrategy paymentStrategy) {
         this.accountNumber = accountNumber;
         this.amount = amount;
+        this.paymentStrategy = paymentStrategy;
     }
 
     @Override
@@ -28,8 +26,16 @@ public class WaterBill implements IBill {
 
     @Override
     public void payBill(User user) {
-        System.out.println("Paying Gas Bill of $" + amount + " for user: " + user.getUsername());
-        user.getAccount().deductAmount(amount);
-        paid=true;
+        paymentStrategy.payBill(this, user);
+    }
+
+    @Override
+    public boolean isPaid() {
+        return paid;
+    }
+
+    @Override
+    public void markAsPaid() {
+        paid = true;
     }
 }
