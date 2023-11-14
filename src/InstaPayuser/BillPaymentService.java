@@ -1,4 +1,4 @@
-package User;
+package InstaPayuser;
 
 import BillPaymentStrategy.ElectricityBill;
 import BillPaymentStrategy.GasBill;

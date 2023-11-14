@@ -1,4 +1,4 @@
-package User;
+package InstaPayuser;
 
 import Account.IAccount;
 import Account.IAccountFactory;
@@ -7,6 +7,7 @@ import BillPaymentStrategy.GasBill;
 import BillPaymentStrategy.IBill;
 import BillPaymentStrategy.WaterBill;
 import BillData.WalletUserBills;
+import InstaPayuser.User;
 import VerificationService.WalletVerification;
 import WalletUserData.Wallet;
 
