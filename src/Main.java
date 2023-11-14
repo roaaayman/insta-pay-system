@@ -9,6 +9,7 @@ import BillPaymentStrategy.IBill;
 import User.BankUser;
 import User.BillPaymentService;
 import User.WalletUser;
+import User.WalletUserController;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
@@ -32,6 +33,7 @@ public class Main {
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
         List<Wallet> Wallets = WalletDummyFactory.createWallets();
+        WalletUserController walletusercontroller=new WalletUserController();
 
 
         boolean exit = false;
@@ -145,13 +147,13 @@ public class Main {
                     case 3:
                         walletUser = new WalletUser(null, null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
-                        walletUser.signUp(Wallets);
+                        walletusercontroller.signUp(Wallets);
                         break;
                     case 4:
                         if (walletUser != null) {
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
-                            walletUser.displayAccountDetails();
+                            walletusercontroller.displayAccountDetails();
 
                             if (walletUsers.contains(walletUser)) {
                                 while (!exit) {
