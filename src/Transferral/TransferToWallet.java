@@ -2,14 +2,13 @@ package Transferral;
 
 import Account.BankAccount;
 import Account.IAccount;
-import Account.InstapayAccount;
 import Account.WalletAccount;
 
 public class TransferToWallet implements ITransferStrategy{
     @Override
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
         // Validate source account and destination account types
-        if (!(sourceAccount instanceof WalletAccount || sourceAccount instanceof InstapayAccount || sourceAccount instanceof BankAccount) ||
+        if (!(sourceAccount instanceof WalletAccount  || sourceAccount instanceof BankAccount) ||
                 !(destinationAccount instanceof WalletAccount)) {
             System.out.println("Invalid account types for this transfer strategy.");
         }

@@ -31,7 +31,7 @@ public class WalletAccount implements IAccount{
 
     @Override
     public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
-        List<Bank> banks = DummyBankFactory.createBanks();
+
         List<Wallet> wallets = WalletDummyFactory.createWallets();
         boolean isValidDestination = false;
         if (destAcc instanceof WalletAccount) {

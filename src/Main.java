@@ -1,5 +1,4 @@
 import Account.BankAccount;
-import Account.InstapayAccount;
 import Account.WalletAccount;
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
@@ -25,7 +24,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         WalletAccount w = new WalletAccount();
         BankAccount b = new BankAccount();
-        InstapayAccount i = new InstapayAccount();
         int billAmount;
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
@@ -77,11 +75,10 @@ public class Main {
                                     System.out.println("Bank User Menu");
                                     System.out.println("1. Transfer to wallet Account");
                                     System.out.println("2. Transfer to Bank Account");
-                                    System.out.println("3. Transfer to instapay Account");
-                                    System.out.println("4. Deposit");
-                                    System.out.println("5. Inquire about his balance");
-                                    System.out.println("6. pay bills");
-                                    System.out.println("7. Exit");
+                                    System.out.println("3. Deposit");
+                                    System.out.println("4. Inquire about his balance");
+                                    System.out.println("5. pay bills");
+                                    System.out.println("6. Exit");
 
                                     System.out.print("Enter your choice: ");
                                     int bankChoice = scanner.nextInt();
@@ -102,27 +99,21 @@ public class Main {
                                             destinationAccountNumber=scanner.nextLine();
                                             b.transfer(b,amountToBeTransferred,destinationAccountNumber);
                                             break;
+
                                         case 3:
-                                            System.out.println("Enter the amount you want to transfer");
-                                            amountToBeTransferred=scanner.nextInt();
-                                            System.out.println("Enter the wallet account number you want to transfer to");
-                                            destinationAccountNumber=scanner.nextLine();
-                                            b.transfer(i,amountToBeTransferred,destinationAccountNumber);
-                                            break;
-                                        case 4:
                                             System.out.println("Enter the amount you want to deposit");
                                             amountToBeDeposited=scanner.nextInt();
                                             b.deposit(amountToBeDeposited);
                                             System.out.println("your new balance is $ "+bankUser.getBalance());
                                             break;
-                                        case 5:
+                                        case 4:
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
-                                        case 6:
+                                        case 5:
                                             List<IBill> bankbills = BankUserBills.initializeBills();
                                             BillPaymentService.chooseAndPayBill(bankbills,bankUser.getBalance(),bankUser.getBankAccount(),bankUser);
                                             break;
-                                        case 7:
+                                        case 6:
 
                                             exitinner=true;
                                             break;
@@ -157,11 +148,10 @@ public class Main {
                                 while (!exit) {
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
-                                    System.out.println("2. Transfer to instapay Account");
-                                    System.out.println("3. Deposit");
-                                    System.out.println("4. Inquire about his balance");
-                                    System.out.println("5. Pay bill");
-                                    System.out.println("6. Exit");
+                                    System.out.println("2. Deposit");
+                                    System.out.println("3. Inquire about his balance");
+                                    System.out.println("4. Pay bill");
+                                    System.out.println("5. Exit");
                                     System.out.print("Enter your choice: ");
                                     int walletChoice = scanner.nextInt();
                                     switch (walletChoice) {
@@ -173,25 +163,24 @@ public class Main {
                                             destinationAccountNumber=scanner.nextLine();
                                             w.transfer(w,amountToBeTransferred,destinationAccountNumber);
                                             break;
+
                                         case 2:
-                                            //
-                                            break;
-                                        case 3:
                                             System.out.println("Enter the amount you want to deposit");
                                             amountToBeDeposited=scanner.nextInt();
                                             w.deposit(amountToBeDeposited);
                                             System.out.println("your new balance is $ "+walletUser.getBalance());
                                             break;
-                                        case 4:
+                                        case 3:
                                             System.out.println("Your current account balance is $ "+ walletUser.getBalance());
                                             break;
-                                        case 5:
+                                        case 4:
                                             List<IBill> walletbills = WalletUserBills.initializeBills();
                                             BillPaymentService.chooseAndPayBill(walletbills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
                                             break;
-                                        case 6:
-
+                                        case 5:
+                                            exitinner=true;
                                             break;
+                                            
 
                                     }
                                 }
