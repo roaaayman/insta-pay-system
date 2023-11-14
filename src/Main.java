@@ -5,7 +5,7 @@ import BankDummydata.DummyBankFactory;
 import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.BillPaymentService;
-import BillPaymentStrategy.IBill;
+import Bill.IBill;
 import User.*;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;

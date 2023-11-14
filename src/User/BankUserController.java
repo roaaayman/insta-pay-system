@@ -1,6 +1,9 @@
 package User;
 
 import BankDummydata.Bank;
+import BillData.BankUserBills;
+import BillPaymentStrategy.BillPaymentService;
+import Bill.IBill;
 import VerificationService.BankVerificationStrategy;
 
 import java.util.ArrayList;
@@ -9,6 +12,8 @@ import java.util.Scanner;
 
 public class BankUserController {
     BankInstaPayUser bankuser;
+    List<IBill> bills = BankUserBills.initializeBills();
+
     private static List<BankInstaPayUser> signedUpUsers = new ArrayList<>();
 
     public void setBankinfo(BankInstaPayUser bankacc, String username, String password, String bankName, String bankAccount,String mobilenumber)
@@ -40,17 +45,7 @@ public class BankUserController {
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
-                    System.out.println("Bank user signed up successfully.");
-                    System.out.println("----------------------------------");
-                    System.out.println("Your Profile");
-
-                    System.out.println("Username: " + bankUser.getUsername());
-                    System.out.println("Password: " + bankUser.getPassword());
-                    System.out.println("Bank Name: " + bankUser.getBankName());
-                    System.out.println("Bank Account: " + bankUser.getBankAccount());
-                    System.out.println("Mobile Number: " + bankUser.getMobileNumber());
-                    System.out.println("----------------------------------");
-
+                   loadDetails();
                     signedUpUsers.add(bankUser);
                 } else {
                     System.out.println("OTP verification failed. Bank user not signed up.");
@@ -107,7 +102,11 @@ public class BankUserController {
         System.out.println("Bank Account: " + user.getBankAccount());
         System.out.println("Mobile Number: " + user.getMobileNumber());
         System.out.println("Balance: $" + user.getBalance());
-
+        if (bills != null) {
+            BillPaymentService.checkBills(bills,user.getMobileNumber());
+        } else {
+            System.out.println("No bills available.");
+        }
         // Additional logic for displaying bills if needed
     }
 }

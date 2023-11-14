@@ -1,14 +1,16 @@
-package BillPaymentStrategy;
+package Bill;
 
+import Bill.IBill;
+import BillPaymentStrategy.IBIllPaymentStrategy;
 import User.InstaPayUser;
 
-public class ElectricityBill implements IBill {
+public class WaterBill implements IBill {
     private double amount;
     private String accountNumber;
     private boolean paid = false;
     private IBIllPaymentStrategy paymentStrategy;
 
-    public ElectricityBill(String accountNumber, double amount, IBIllPaymentStrategy paymentStrategy) {
+    public WaterBill(String accountNumber, double amount, IBIllPaymentStrategy paymentStrategy) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.paymentStrategy = paymentStrategy;

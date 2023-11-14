@@ -1,5 +1,6 @@
 package BillPaymentStrategy;
 
+import Bill.IBill;
 import User.InstaPayUser;
 
 public class GasBillPaymentStrategy implements IBIllPaymentStrategy{
