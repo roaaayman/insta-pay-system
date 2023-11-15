@@ -60,7 +60,6 @@ public class BankUserController {
     private void promptUserForDetails( BankInstaPayUser bankuser) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Signing up Wallet user...");
 
         // Prompt the user for username
         System.out.print("Enter Username: ");

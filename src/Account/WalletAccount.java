@@ -29,31 +29,8 @@ public class WalletAccount implements IAccount{
         balance=b;
     }
 
-    @Override
-    public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
-
-        List<Wallet> wallets = WalletDummyFactory.createWallets();
-        boolean isValidDestination = false;
-        if (destAcc instanceof WalletAccount) {
-            for (Wallet wallet : wallets) {
-                if (wallet.getMobileNumber().equals(destAccountNumber)) {
-                    isValidDestination = true;
-                    TransferToWallet transferToWallet = new TransferToWallet();
-                    transferToWallet.transfer(this, destAcc, amount, destAccountNumber);
-                    break;
-                }
-            }
-            if (!isValidDestination) {
-                System.out.println("Invalid destination account number. Transfer failed.");
-                return;
-            }
-
-        } else {
-            System.out.println("Unsupported");
 
 
-        }
-    }
     public double deductAmount(double amount) {
         if (balance >= amount) {
             balance -= amount;

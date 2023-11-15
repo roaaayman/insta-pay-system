@@ -6,6 +6,9 @@ import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.BillPaymentService;
 import Bill.IBill;
+import Transferral.ITransferStrategy;
+import Transferral.TransferToBank;
+import Transferral.TransferToWallet;
 import User.*;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
@@ -20,11 +23,15 @@ public class Main {
 
 
 
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         WalletAccount w = new WalletAccount();
         BankAccount b = new BankAccount();
+        ITransferStrategy transfertobank=new TransferToBank();
+        ITransferStrategy transfertoWallet=new TransferToWallet();
+
         int billAmount;
         // Assuming you have a list of banks created by DummyBankFactory
         List<Bank> banks = DummyBankFactory.createBanks();
@@ -90,15 +97,15 @@ public class Main {
                                             scanner.nextLine();
                                             System.out.println("Enter the wallet account number you want to transfer to");
                                             destinationAccountNumber=scanner.nextLine();
-                                            b.transfer(w,amountToBeTransferred,destinationAccountNumber);
+                                            transfertoWallet.transfer(b,w,amountToBeTransferred,destinationAccountNumber);
                                             break;
                                         case 2:
                                             System.out.println("Enter the amount you want to transfer");
                                             amountToBeTransferred=scanner.nextInt();
                                             scanner.nextLine();
-                                            System.out.println("Enter the wallet account number you want to transfer to");
+                                            System.out.println("Enter the bank account number you want to transfer to");
                                             destinationAccountNumber=scanner.nextLine();
-                                            b.transfer(b,amountToBeTransferred,destinationAccountNumber);
+                                            transfertobank.transfer(b,b,amountToBeTransferred,destinationAccountNumber);
                                             break;
 
                                         case 3:
@@ -162,7 +169,7 @@ public class Main {
                                             scanner.nextLine();
                                             System.out.println("Enter the wallet account number you want to transfer to");
                                             destinationAccountNumber=scanner.nextLine();
-                                            w.transfer(w,amountToBeTransferred,destinationAccountNumber);
+                                            transfertoWallet.transfer(w,w,amountToBeTransferred,destinationAccountNumber);
                                             break;
 
                                         case 2:

@@ -1,14 +1,5 @@
 package Account;
 
-import BankDummydata.Bank;
-import BankDummydata.DummyBankFactory;
-import Transferral.TransferFromBank;
-import Transferral.TransferToWallet;
-import WalletUserData.Wallet;
-import WalletUserData.WalletDummyFactory;
-
-import java.util.List;
-
 public class BankAccount implements IAccount{
     private double balance;
     @Override
@@ -20,44 +11,7 @@ public class BankAccount implements IAccount{
         balance=b;
     }
 
-
-    public void transfer(IAccount destAcc, double amount,String destAccountNumber) {
-        List<Bank> banks = DummyBankFactory.createBanks();
-        List<Wallet> wallets = WalletDummyFactory.createWallets();
-        boolean isValidDestination = false;
-        if (destAcc instanceof WalletAccount) {
-            for (Wallet wallet : wallets) {
-                if (wallet.getMobileNumber().equals(destAccountNumber)) {
-                    isValidDestination = true;
-                    TransferToWallet transferToWallet = new TransferToWallet();
-                    transferToWallet.transfer(this, destAcc, amount, destAccountNumber);
-                    break;
-                }
-            }
-            if (!isValidDestination) {
-                System.out.println("Invalid destination account number. Transfer failed.");
-                return;
-            }
-        } else if (destAcc instanceof BankAccount) {
-            for (Bank bank : banks) {
-                if (bank.getBankAccount().equals(destAccountNumber)) {
-                    isValidDestination = true;
-                    TransferFromBank transferFromBank = new TransferFromBank();
-                    transferFromBank.transfer(this, destAcc, amount, destAccountNumber);
-                    break;
-                }
-            }
-            if (!isValidDestination) {
-                System.out.println("Invalid destination account number. Transfer failed.");
-                return;
-            }
-        } else {
-            System.out.println("Unsupported");
-
-
-        }
-    }
-
+    @Override
     public double deductAmount(double amount) {
         if (balance >= amount) {
             balance -= amount;
@@ -71,8 +25,9 @@ public class BankAccount implements IAccount{
     @Override
     public void deposit(double amount) {
         balance += amount;
-        System.out.println("Deposited $" + amount + " into Bank Account. New balance: $" + balance);
+        System.out.println("Deposited $" + amount + " into Bank Account");
     }
+
 
     public String getAccountType() {
         return "Bank Account";
