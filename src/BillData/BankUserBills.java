@@ -1,12 +1,18 @@
 package BillData;
 
+import Bill.ElectricityBill;
+import Bill.GasBill;
+import Bill.IBill;
+import Bill.WaterBill;
 import BillPaymentStrategy.*;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankUserBills {
+public class BankUserBills  {
+
+
     public static List<IBill> initializeBills() {
         List<IBill> bills = new ArrayList<>();
 
@@ -22,5 +28,5 @@ public class BankUserBills {
         bills.add(new ElectricityBill("555566667", 120.0, electricity));
 
         return bills;
-    }
+}
 }

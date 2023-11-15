@@ -1,16 +1,14 @@
 package BillPaymentStrategy;
 
-import User.User;
+import Bill.IBill;
+import User.InstaPayUser;
 
 public class ElectricityBillPaymentStrategy implements IBIllPaymentStrategy {
 
     @Override
-    public void payBill(IBill bill, User user) {
-        System.out.println("Paying Electricity Bill of $" + bill.getAmount() + " for user: " + user.getUsername());
-        System.out.println(user.getAccount().getBalance());
-        user.getAccount().deductAmount(bill.getAmount());
-        System.out.println(user.getAccount().getBalance());
-
+    public void payBill(IBill bill, InstaPayUser instaPayUser) {
+        System.out.println("Paying Electricity Bill of $" + bill.getAmount() + " for user: " + instaPayUser.getUsername());
+        instaPayUser.getAccount().deductAmount(bill.getAmount());
         bill.markAsPaid();
     }
 }

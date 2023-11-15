@@ -2,28 +2,36 @@ package Transferral;
 
 import Account.BankAccount;
 import Account.IAccount;
-import Account.InstapayAccount;
 import Account.WalletAccount;
+import WalletUserData.Wallet;
+import WalletUserData.WalletDummyFactory;
+
+import java.util.List;
 
 public class TransferToWallet implements ITransferStrategy{
     @Override
     public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
-        // Validate source account and destination account types
-        if (!(sourceAccount instanceof WalletAccount || sourceAccount instanceof InstapayAccount || sourceAccount instanceof BankAccount) ||
-                !(destinationAccount instanceof WalletAccount)) {
-            System.out.println("Invalid account types for this transfer strategy.");
+        List<Wallet> wallets = WalletDummyFactory.createWallets();
+        boolean isValidDestination = false;
+        if (destinationAccount instanceof WalletAccount) {
+            for (Wallet wallet : wallets) {
+                if (wallet.getMobileNumber().equals(destAccountNumber)) {
+                    isValidDestination = true;
+                    sourceAccount.deductAmount(amount);
+                    destinationAccount.deposit(amount);
+                    destinationAccount.setBalance(amount);
+                    break;
+                }
+            }
+            if (!isValidDestination) {
+                System.out.println("Invalid destination account number. Transfer failed.");
+                return;
+            }
+
+        } else {
+            System.out.println("Unsupported");
+
+
         }
-
-        // Check if the source account has sufficient balance
-        if (sourceAccount.getBalance() < amount) {
-            System.out.println("Insufficient funds in the source account.");
-        }
-        sourceAccount.deductAmount(amount);
-        destinationAccount.deposit(sourceAccount.deductAmount(amount));
-
-        // Implement logic for transferring to different account types
-        // You may need to interact with the wallet provider's API or update the account balances
-        System.out.println("Transferring " + amount + " to wallet account with number: "+destAccountNumber);
-
 }
 }

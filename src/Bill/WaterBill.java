@@ -1,20 +1,18 @@
-package BillPaymentStrategy;
-import User.User;
+package Bill;
 
-public class BillPaymentContext implements IBill{
-    private IBIllPaymentStrategy paymentStrategy;
+import Bill.IBill;
+import BillPaymentStrategy.IBIllPaymentStrategy;
+import User.InstaPayUser;
+
+public class WaterBill implements IBill {
     private double amount;
     private String accountNumber;
     private boolean paid = false;
+    private IBIllPaymentStrategy paymentStrategy;
 
-    public BillPaymentContext(String accountNumber, double amount, IBIllPaymentStrategy paymentStrategy) {
+    public WaterBill(String accountNumber, double amount, IBIllPaymentStrategy paymentStrategy) {
         this.accountNumber = accountNumber;
         this.amount = amount;
-        this.paymentStrategy = paymentStrategy;
-    }
-
-
-    public void setPaymentStrategy(IBIllPaymentStrategy paymentStrategy) {
         this.paymentStrategy = paymentStrategy;
     }
 
@@ -29,19 +27,17 @@ public class BillPaymentContext implements IBill{
     }
 
     @Override
-    public void payBill(User user) {
-        paymentStrategy.payBill(this, user);
+    public void payBill(InstaPayUser instaPayUser) {
+        paymentStrategy.payBill(this, instaPayUser);
     }
 
     @Override
     public boolean isPaid() {
         return paid;
     }
+
     @Override
     public void markAsPaid() {
         paid = true;
     }
-
-
-
 }

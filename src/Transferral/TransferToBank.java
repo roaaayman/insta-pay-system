@@ -2,27 +2,37 @@ package Transferral;
 
 import Account.BankAccount;
 import Account.IAccount;
-import Account.InstapayAccount;
-import Account.WalletAccount;
+import BankDummydata.Bank;
+import BankDummydata.DummyBankFactory;
+import WalletUserData.Wallet;
+import WalletUserData.WalletDummyFactory;
+
+import java.util.List;
 
 public class TransferToBank implements ITransferStrategy{
     @Override
-    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount,String destAccountNumber) {
-        // Validate source account and destination account types
-        if (!(sourceAccount instanceof BankAccount) ||
-                !(destinationAccount instanceof BankAccount )) {
-            throw new IllegalArgumentException("Invalid account types for this transfer strategy.");
+    public void transfer(IAccount sourceAccount, IAccount destinationAccount, double amount, String destAccountNumber) {
+        List<Bank> banks = DummyBankFactory.createBanks();
+        boolean isValidDestination = false;
+
+        if (destinationAccount instanceof BankAccount) {
+            for (Bank bank : banks) {
+                if (bank.getBankAccount().equals(destAccountNumber)) {
+                    isValidDestination = true;
+                    sourceAccount.deductAmount(amount);
+                    sourceAccount.setBalance(sourceAccount.getBalance()-amount);
+                    destinationAccount.deposit(amount);
+                    destinationAccount.setBalance(amount);
+                    break;
+                }
+            }
+        } else {
+            System.out.println("Unsupported account type");
         }
 
-        // Check if the source account has sufficient balance
-        if (sourceAccount.getBalance() < amount) {
-            throw new IllegalStateException("Insufficient funds in the source account.");
+        if (!isValidDestination) {
+            System.out.println("Invalid destination account number. Transfer failed.");
         }
-        //destinationAccount.setBalance(0);
-        sourceAccount.deductAmount(amount);
-        destinationAccount.deposit(amount);
-        // Implement logic for transferring to different account types
-        // You may need to interact with the bank API or update the account balances
-        System.out.println("Transferring " + amount + " to bank account with number: "+destAccountNumber);
     }
+
 }
