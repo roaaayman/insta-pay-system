@@ -19,7 +19,7 @@ public class TransferToWallet implements ITransferStrategy{
                     isValidDestination = true;
                     destinationAccount.setBalance(0);
                     sourceAccount.deductAmount(amount);
-                    destinationAccount.deposittodestAcc(amount);
+                    destinationAccount.deposit(amount);
                     break;
                 }
             }
