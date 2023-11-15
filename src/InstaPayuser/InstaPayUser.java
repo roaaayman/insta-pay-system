@@ -1,11 +1,10 @@
-package InstaPayuser;
+package User;
 
 import Account.IAccount;
-import BillPaymentStrategy.IBill;
 
 import java.util.Scanner;
 
-public abstract class User {
+public  class InstaPayUser {
     private final IAccount account;
 
     private String username;
@@ -15,7 +14,7 @@ public abstract class User {
     private String enteredUsername;
     private String enteredPassword;
 
-    public User(String username, String password, IAccount account) {
+    public InstaPayUser(String username, String password, IAccount account) {
         this.username = username;
         this.password = password;
         this.account = account;
@@ -56,11 +55,6 @@ public abstract class User {
         return account;
     }
 
-    // Implementation of isAuthenticated
-    public boolean isAuthenticated() {
-        // Use the enteredUsername and enteredPassword variables here
-        return enteredUsername.equals(username) && enteredPassword.equals(password);
-    }
 
 
 }

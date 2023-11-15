@@ -1,9 +1,10 @@
-package InstaPayuser;
+package BillPaymentStrategy;
 
-import BillPaymentStrategy.ElectricityBill;
-import BillPaymentStrategy.GasBill;
-import BillPaymentStrategy.IBill;
-import BillPaymentStrategy.WaterBill;
+import Bill.ElectricityBill;
+import Bill.GasBill;
+import Bill.IBill;
+import Bill.WaterBill;
+import User.InstaPayUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class BillPaymentService {
 
-    public static void chooseAndPayBill(List<IBill> bills, double balance,String accnum,User user) {
+    public static void chooseAndPayBill(List<IBill> bills, double balance, String accnum, InstaPayUser instaPayUser) {
         Scanner scanner = new Scanner(System.in);
 
         // Display the bills associated with the user's account
@@ -39,7 +40,7 @@ public class BillPaymentService {
                 if (confirmation.equals("yes")) {
                     if (balance >= selectedBill.getAmount()) {
                         // Pay the bill
-                        selectedBill.payBill(user);  // Pass the user as null, adjust the method if necessary
+                        selectedBill.payBill(instaPayUser);  // Pass the user as null, adjust the method if necessary
                         System.out.println("----------------------------------");
 
                         List<IBill> updatedBills = new ArrayList<>(bills);
@@ -85,7 +86,7 @@ public class BillPaymentService {
                     }
                 }
             }
-            }
+        }
 
 
-}}
+    }}

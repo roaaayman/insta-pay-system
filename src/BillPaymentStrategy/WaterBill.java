@@ -1,6 +1,8 @@
-package BillPaymentStrategy;
+package Bill;
 
-import InstaPayuser.User;
+import Bill.IBill;
+import BillPaymentStrategy.IBIllPaymentStrategy;
+import User.InstaPayUser;
 
 public class WaterBill implements IBill {
     private double amount;
@@ -25,8 +27,8 @@ public class WaterBill implements IBill {
     }
 
     @Override
-    public void payBill(User user) {
-        paymentStrategy.payBill(this, user);
+    public void payBill(InstaPayUser instaPayUser) {
+        paymentStrategy.payBill(this, instaPayUser);
     }
 
     @Override
