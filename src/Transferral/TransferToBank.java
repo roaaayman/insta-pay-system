@@ -15,13 +15,14 @@ public class TransferToBank implements ITransferStrategy{
         List<Bank> banks = DummyBankFactory.createBanks();
         boolean isValidDestination = false;
 
-         if (destinationAccount instanceof BankAccount) {
+        if (destinationAccount instanceof BankAccount) {
             for (Bank bank : banks) {
                 if (bank.getBankAccount().equals(destAccountNumber)) {
                     isValidDestination = true;
-                    destinationAccount.setBalance(0);
                     sourceAccount.deductAmount(amount);
+                    sourceAccount.setBalance(sourceAccount.getBalance()-amount);
                     destinationAccount.deposit(amount);
+                    destinationAccount.setBalance(amount);
                     break;
                 }
             }

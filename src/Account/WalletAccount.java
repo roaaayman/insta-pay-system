@@ -31,12 +31,20 @@ public class WalletAccount implements IAccount{
 
 
 
+    @Override
     public double deductAmount(double amount) {
         if (balance >= amount) {
             balance -= amount;
             System.out.println("Deduction successful. Remaining balance: " + balance);
+            return amount;
+
         }
-        return amount;
+        else {
+            System.out.println("Insufficient funds. Deduction failed.");
+            return 0;
+        }
+
+
     }
     @Override
     public void deposit(double amount) {

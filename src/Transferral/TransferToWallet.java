@@ -17,9 +17,9 @@ public class TransferToWallet implements ITransferStrategy{
             for (Wallet wallet : wallets) {
                 if (wallet.getMobileNumber().equals(destAccountNumber)) {
                     isValidDestination = true;
-                    destinationAccount.setBalance(0);
                     sourceAccount.deductAmount(amount);
                     destinationAccount.deposit(amount);
+                    destinationAccount.setBalance(amount);
                     break;
                 }
             }
