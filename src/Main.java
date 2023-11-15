@@ -6,6 +6,8 @@ import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.BillPaymentService;
 import Bill.IBill;
+import Transferral.ITransferStrategy;
+import Transferral.TransferToBank;
 import Transferral.TransferToWallet;
 import User.*;
 import WalletUserData.Wallet;
