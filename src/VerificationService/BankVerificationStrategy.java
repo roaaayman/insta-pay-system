@@ -1,8 +1,6 @@
 package VerificationService;
 
 import BankDummydata.Bank;
-import BillData.BankUserBills;
-import BillPaymentStrategy.IBill;
 
 import java.util.List;
 import java.util.Random;

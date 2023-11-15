@@ -10,9 +10,7 @@ public class BankInstaPayUser extends InstaPayUser {
     private String bankName;
     private String bankAccount;
     private String mobileNumber;
-    private static List<BankInstaPayUser> signedUpUsers = new ArrayList<>();
 
-    // List<IBill> bills = BankUserBills.initializeBills();
 
 
     public BankInstaPayUser(String username, String password, String bankName, String bankAccount, String mobileNumber, IAccount Account) {

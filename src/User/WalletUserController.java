@@ -1,18 +1,20 @@
 package User;
 
-import Account.IAccount;
-import Account.WalletAccount;
 import BillData.WalletUserBills;
-import BillPaymentStrategy.IBill;
+import BillPaymentStrategy.BillPaymentService;
+import Bill.IBill;
 import VerificationService.WalletVerificationStrategy;
 
 import WalletUserData.Wallet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WalletUserController {
     WalletInstaPayUser walletuser;
+    private static List<WalletInstaPayUser> signedUpUsers = new ArrayList<>();
+
     public void setWalletinfo(WalletInstaPayUser wallet, String username, String password, String mobilenumber, String walletPRovider)
     {
         walletuser=wallet;
@@ -34,6 +36,7 @@ public class WalletUserController {
                 System.out.println("Account Available in Wallet provider " + walletuser.getWalletProvider());
                 System.out.println("----------------------------------");
                 loadDetails();
+                signedUpUsers.add(walletuser);
 
                 boolean verified = walletv.verifyOTP(walletuser.getMobileNumber());
                 if (verified) {

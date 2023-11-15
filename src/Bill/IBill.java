@@ -1,4 +1,4 @@
-package BillPaymentStrategy;
+package Bill;
 
 import User.InstaPayUser;
 
