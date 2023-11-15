@@ -59,6 +59,23 @@ public class BankUserController {
             System.out.println("Bank user is already registered.");
         }
     }
+    public BankInstaPayUser signInBankUser(List<BankInstaPayUser> bankUsers) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your username: ");
+        String enteredUsername = scanner.nextLine();
+
+        System.out.print("Enter your password: ");
+        String enteredPassword = scanner.nextLine();
+
+        for (BankInstaPayUser user : bankUsers) {
+            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
+                return user; // Return the authenticated user
+            }
+        }
+
+        return null; // Return null if authentication fails
+    }
     private void promptUserForDetails( BankInstaPayUser bankuser) {
         Scanner scanner = new Scanner(System.in);
 

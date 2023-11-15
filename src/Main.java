@@ -79,10 +79,10 @@ public class Main {
 
                         if (!bankUsers.isEmpty()) {
                             System.out.println("Bank User Sign-In:");
-                            bankUser.signIn();
+                            bankUser=bankUserController.signInBankUser(bankUsers);
                             System.out.println("----------------------------------");
 
-                            if (bankUsers.contains(bankUser)) {
+                            if (bankUser!=null) {
                                 System.out.println("User authenticated successfully.");
                                 bankUserController.displayAccountDetails(bankUser);
                                 while (!exitinner) {
@@ -159,13 +159,16 @@ public class Main {
                         break;
                     case 4:
 
+                        if(!walletUsers.isEmpty()) {
                             System.out.println("Wallet User Sign-In:");
-                            walletUser.signIn();
-                            walletUserController.displayAccountDetails();
-                        System.out.println("----------------------------------");
+                            walletUser = walletUserController.signInWalletUser(walletUsers);
 
-                        if (walletUsers.contains(walletUser)) {
+                            if (walletUser != null) {
+                                System.out.println("User authenticated successfully.");
+                                walletUserController.displayAccountDetails();
+
                                 while (!exitinner2) {
+                                    System.out.println("----------------------------------");
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
                                     System.out.println("2. Deposit");
@@ -177,37 +180,42 @@ public class Main {
                                     switch (walletChoice) {
                                         case 1:
                                             System.out.println("Enter the amount you want to transfer");
-                                            amountToBeTransferred=scanner.nextInt();
+                                            amountToBeTransferred = scanner.nextInt();
                                             scanner.nextLine();
                                             System.out.println("Enter the wallet account number you want to transfer to");
-                                            destinationAccountNumber=scanner.nextLine();
-                                            transfertoWallet.transfer(w,w,amountToBeTransferred,destinationAccountNumber);
+                                            destinationAccountNumber = scanner.nextLine();
+                                            transfertoWallet.transfer(w, w, amountToBeTransferred, destinationAccountNumber);
                                             break;
 
                                         case 2:
                                             System.out.println("Enter the amount you want to deposit");
-                                            amountToBeDeposited=scanner.nextInt();
+                                            amountToBeDeposited = scanner.nextInt();
                                             w.deposit(amountToBeDeposited);
-                                            System.out.println("your new balance is $ "+walletUser.getBalance());
+                                            System.out.println("your new balance is $ " + walletUser.getBalance());
                                             break;
                                         case 3:
-                                            System.out.println("Your current account balance is $ "+ walletUser.getBalance());
+                                            System.out.println("Your current account balance is $ " + walletUser.getBalance());
                                             break;
                                         case 4:
                                             List<IBill> walletbills = WalletUserBills.initializeBills();
                                             List<IBill> userBills = BillPaymentService.checkBills(walletbills, walletUser.getMobileNumber());
-                                            BillPaymentService.chooseAndPayBill(userBills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
+                                            BillPaymentService.chooseAndPayBill(userBills, walletUser.getBalance(), walletUser.getMobileNumber(), walletUser);
                                             break;
                                         case 5:
-                                            exitinner2=true;
+                                            exitinner2 = true;
                                             break;
-                                            
+
 
                                     }
                                 }
                             } else {
                                 System.out.println("Wallet User authentication failed. Returning to Main Menu.");
                             }
+                        }
+                        else{
+                            System.out.println("No wallet users signed up. Please sign up first.");
+                            break;
+                        }
 
                         break;
                     case 5:
@@ -217,6 +225,7 @@ public class Main {
                         System.out.println("Invalid choice. Please try again.");
                         break;
                 }
+
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice. Please enter a valid number.");
             }

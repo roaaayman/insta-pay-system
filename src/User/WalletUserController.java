@@ -76,6 +76,23 @@ public class WalletUserController {
 
     }
 
+    public WalletInstaPayUser signInWalletUser(List<WalletInstaPayUser> walletUsers) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter your username: ");
+        String enteredUsername = scanner.nextLine();
+
+        System.out.print("Enter your password: ");
+        String enteredPassword = scanner.nextLine();
+
+        for (WalletInstaPayUser user : walletUsers) {
+            if (user.getUsername().equals(enteredUsername) && user.getPassword().equals(enteredPassword)) {
+                return user; // Return the authenticated user
+            }
+        }
+
+        return null; // Return null if authentication fails
+    }
 
     public void loadDetails()
     {
