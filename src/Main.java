@@ -145,6 +145,7 @@ public class Main {
                         walletUser = new WalletInstaPayUser(null, null, null, null,w);
                         System.out.println("Wallet User Sign-Up:");
                         walletUserController.signUp(Wallets,walletUser);
+                        walletUsers.add(walletUser);
 
                         break;
                     case 4:
