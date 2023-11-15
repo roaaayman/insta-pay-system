@@ -42,6 +42,7 @@ public class BankUserController {
                 System.out.println("----------------------------------");
                 loadDetails();
 
+
                 System.out.println("----------------------------------");
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
@@ -96,14 +97,17 @@ public class BankUserController {
 
 
 
+
+
     public void displayAccountDetails(BankInstaPayUser user) {
+
         System.out.println("Account Details:");
         System.out.println("Bank Name: " + user.getBankName());
         System.out.println("Bank Account: " + user.getBankAccount());
         System.out.println("Mobile Number: " + user.getMobileNumber());
         System.out.println("Balance: $" + user.getBalance());
         if (bills != null) {
-            BillPaymentService.checkBills(bills,user.getMobileNumber());
+            BillPaymentService.checkBills(bills,user.getBankAccount());
         } else {
             System.out.println("No bills available.");
         }
