@@ -1,6 +1,6 @@
 package Transferral;
 
-import Account.BankAccount;
+import Account.*;
 import Account.IAccount;
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;

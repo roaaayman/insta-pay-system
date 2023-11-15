@@ -17,24 +17,6 @@ public class BillPaymentService {
         List<IBill> userBills = checkBills(bills, accnum);
 
         // Display the unpaid bills associated with the user's account
-        System.out.println("Bills associated with your account:");
-        for (int i = 0; i < userBills.size(); i++) {
-            IBill bill = userBills.get(i);
-            String billDescription = "";
-
-            // Customize the bill description based on the bill type
-            if (bill instanceof GasBill) {
-                billDescription = "Gas bill with amount $" + bill.getAmount();
-            } else if (bill instanceof WaterBill) {
-                billDescription = "Water bill with amount $" + bill.getAmount();
-            } else if (bill instanceof ElectricityBill) {
-                billDescription = "Electricity bill with amount $" + bill.getAmount();
-            } else {
-                billDescription = "Bill with amount $" + bill.getAmount();
-            }
-
-            System.out.println((i + 1) + ". " + billDescription);
-        }
 
         System.out.print("Enter the number of the bill you want to pay (1, 2, 3, ...): ");
         int billNumber = scanner.nextInt();
@@ -49,8 +31,35 @@ public class BillPaymentService {
                 if (confirmation.equals("yes")) {
                     if (balance >= selectedBill.getAmount()) {
                         selectedBill.payBill(instaPayUser);
-                        System.out.println("Deduction successful. Remaining balance: " + (balance - selectedBill.getAmount()));
+                        userBills.remove(selectedBill);
                         System.out.println("----------------------------------");
+                        if (userBills.isEmpty()) {
+                            System.out.println("No bills associated with your account.");
+                        } else {
+                            System.out.println("Updated Bills associated with your account:");
+                            for (int i = 0; i < userBills.size(); i++) {
+                                IBill bill = userBills.get(i);
+                                String billType = ""; // Replace these with actual properties from your IBill interface
+                                double amount ;
+                                boolean isPaid ;
+
+                                // Retrieve bill information
+                                if (bill instanceof GasBill) {
+                                    billType = "Gas bill";
+                                } else if (bill instanceof WaterBill) {
+                                    billType = "Water bill";
+                                } else if (bill instanceof ElectricityBill) {
+                                    billType = "Electricity bill";
+                                }
+
+                                amount = bill.getAmount();
+                                isPaid = bill.isPaid();
+                                // Display bill details
+                                System.out.println((i + 1) + ". " + billType + " with amount $" + amount + ", Paid: " + isPaid);
+                            }
+                        }
+
+
 
                         // Remove the paid bill from the userBills list by index
                         userBills.remove(selectedBill);
@@ -80,37 +89,42 @@ public class BillPaymentService {
     public static List<IBill> checkBills(List<IBill> bills, String accNum) {
         List<IBill> userBills = new ArrayList<>();
 
-        // Filter bills associated with the provided account number
+        // Filter unpaid bills associated with the provided account number
         for (IBill bill : bills) {
-            if (bill.getAccountNumber().equals(accNum)) {
+            if (bill.getAccountNumber().equals(accNum) && !bill.isPaid()) {
                 userBills.add(bill);
             }
         }
 
-        // Check bills associated with the user's account number
+        // Check unpaid bills associated with the user's account number
         if (userBills.isEmpty()) {
-            System.out.println("No bills associated with the provided account number.");
+            System.out.println("No unpaid bills associated with the provided account number.");
         } else {
-            System.out.println("Bills associated with your account:");
+            System.out.println("Unpaid bills associated with your account:");
             for (int i = 0; i < userBills.size(); i++) {
                 IBill bill = userBills.get(i);
-                String billDescription = "";
+                String billType = getBillType(bill);
+                double amount = bill.getAmount();
 
-                // Customize the bill description based on the bill type
-                if (bill instanceof GasBill) {
-                    billDescription = "Gas bill with amount $" + bill.getAmount();
-                } else if (bill instanceof WaterBill) {
-                    billDescription = "Water bill with amount $" + bill.getAmount();
-                } else if (bill instanceof ElectricityBill) {
-                    billDescription = "Electricity bill with amount $" + bill.getAmount();
-                } else {
-                    billDescription = "Bill with amount $" + bill.getAmount();
-                }
-
-                System.out.println((i + 1) + ". " + billDescription);
+                // Display bill details
+                System.out.println((i + 1) + ". " + billType + " with amount $" + amount);
             }
         }
 
         return userBills;
     }
-}
+
+    // Helper method to get bill type
+    private static String getBillType(IBill bill) {
+        if (bill instanceof GasBill) {
+            return "Gas bill";
+        } else if (bill instanceof WaterBill) {
+            return "Water bill";
+        } else if (bill instanceof ElectricityBill) {
+            return "Electricity bill";
+        }
+        return "Unknown bill type";
+    }}
+
+
+
