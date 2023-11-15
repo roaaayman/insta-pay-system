@@ -42,6 +42,7 @@ public class Main {
 
         boolean exit = false;
         boolean exitinner=false;
+        boolean exitinner2=false;
         BankInstaPayUser bankUser = null;
         WalletInstaPayUser walletUser = null;
         int amountToBeTransferred;
@@ -154,7 +155,7 @@ public class Main {
                             walletUser.signIn();
                             walletUserController.displayAccountDetails();
                             if (walletUsers.contains(walletUser)) {
-                                while (!exit) {
+                                while (!exitinner2) {
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
                                     System.out.println("2. Deposit");
@@ -187,7 +188,7 @@ public class Main {
                                             BillPaymentService.chooseAndPayBill(walletbills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
                                             break;
                                         case 5:
-                                            exitinner=true;
+                                            exitinner2=true;
                                             break;
                                             
 

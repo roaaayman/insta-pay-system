@@ -19,9 +19,10 @@ public class TransferToBank implements ITransferStrategy{
             for (Bank bank : banks) {
                 if (bank.getBankAccount().equals(destAccountNumber)) {
                     isValidDestination = true;
-                    destinationAccount.setBalance(0);
                     sourceAccount.deductAmount(amount);
+                    sourceAccount.setBalance(sourceAccount.getBalance()-amount);
                     destinationAccount.deposit(amount);
+                    destinationAccount.setBalance(amount);
                     break;
                 }
             }

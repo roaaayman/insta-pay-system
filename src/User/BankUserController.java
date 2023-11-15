@@ -40,8 +40,9 @@ public class BankUserController {
 
                 System.out.println("Account Available in bank " + bankUser.getBankName());
                 System.out.println("----------------------------------");
-                System.out.println("----------------------------------");
                 loadDetails();
+
+                System.out.println("----------------------------------");
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
@@ -83,7 +84,7 @@ public class BankUserController {
     }
     public void loadDetails()
     {
-        System.out.println("Wallet user signed up successfully.");
+        System.out.println("Bank user signed up successfully.");
         System.out.println("----------------------------------");
         System.out.println("Your Profile");
         System.out.println("Username: " + bankuser.getUsername());
