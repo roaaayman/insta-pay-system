@@ -1,8 +1,7 @@
 package Transferral;
 
-import Account.BankAccount;
+import Account.*;
 import Account.IAccount;
-import Account.WalletAccount;
 import WalletUserData.Wallet;
 import WalletUserData.WalletDummyFactory;
 
