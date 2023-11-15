@@ -47,7 +47,7 @@ public class BankUserController {
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
                 if (verified) {
-                   loadDetails();
+                    loadDetails();
                     signedUpUsers.add(bankUser);
                 } else {
                     System.out.println("OTP verification failed. Bank user not signed up.");

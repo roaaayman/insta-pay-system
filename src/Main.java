@@ -72,7 +72,7 @@ public class Main {
                         System.out.println("Bank User Sign-Up:");
                         bankUserController.signUpBankUser(banks,bankUser);
                         bankUsers.add(bankUser);
-                        
+
                         break;
                     case 2:
 
@@ -146,7 +146,7 @@ public class Main {
                             System.out.println("No bank users signed up. Please sign up first.");
                             break;
                         }
-                            // Check if sign-in was successful before entering the inner loop
+                        // Check if sign-in was successful before entering the inner loop
 
 
                         break;
