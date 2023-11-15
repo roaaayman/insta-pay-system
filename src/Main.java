@@ -77,6 +77,8 @@ public class Main {
                         if (!bankUsers.isEmpty()) {
                             System.out.println("Bank User Sign-In:");
                             bankUser.signIn();
+                            System.out.println("----------------------------------");
+
                             if (bankUsers.contains(bankUser)) {
                                 System.out.println("User authenticated successfully.");
                                 bankUserController.displayAccountDetails(bankUser);
@@ -119,8 +121,10 @@ public class Main {
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
                                         case 5:
+
                                             List<IBill> bankbills = BankUserBills.initializeBills();
-                                            BillPaymentService.chooseAndPayBill(bankbills,bankUser.getBalance(),bankUser.getBankAccount(),bankUser);
+                                            List<IBill> userBills = BillPaymentService.checkBills(bankbills, bankUser.getBankAccount());
+                                            BillPaymentService.chooseAndPayBill(userBills,bankUser.getBalance(),bankUser.getBankAccount(),bankUser);
                                             break;
                                         case 6:
 
@@ -154,7 +158,9 @@ public class Main {
                             System.out.println("Wallet User Sign-In:");
                             walletUser.signIn();
                             walletUserController.displayAccountDetails();
-                            if (walletUsers.contains(walletUser)) {
+                        System.out.println("----------------------------------");
+
+                        if (walletUsers.contains(walletUser)) {
                                 while (!exitinner2) {
                                     System.out.println("Wallet User Menu");
                                     System.out.println("1. Transfer to wallet Account");
@@ -185,7 +191,8 @@ public class Main {
                                             break;
                                         case 4:
                                             List<IBill> walletbills = WalletUserBills.initializeBills();
-                                            BillPaymentService.chooseAndPayBill(walletbills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
+                                            List<IBill> userBills = BillPaymentService.checkBills(walletbills, walletUser.getMobileNumber());
+                                            BillPaymentService.chooseAndPayBill(userBills,walletUser.getBalance(),walletUser.getMobileNumber(),walletUser);
                                             break;
                                         case 5:
                                             exitinner2=true;

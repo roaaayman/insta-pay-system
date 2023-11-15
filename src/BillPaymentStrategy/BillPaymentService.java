@@ -15,9 +15,10 @@ public class BillPaymentService {
     public static void chooseAndPayBill(List<IBill> bills, double balance, String accnum, InstaPayUser instaPayUser) {
         Scanner scanner = new Scanner(System.in);
 
+
         // Display the bills associated with the user's account
         System.out.println("Bills associated with your account:");
-        checkBills(bills,accnum);
+        List<IBill> userBills =checkBills(bills, accnum);
         System.out.println("----------------------------------");
 
         // Prompt the user to choose a bill
@@ -42,10 +43,7 @@ public class BillPaymentService {
                         // Pay the bill
                         selectedBill.payBill(instaPayUser);  // Pass the user as null, adjust the method if necessary
                         System.out.println("----------------------------------");
-
-                        List<IBill> updatedBills = new ArrayList<>(bills);
-                        updatedBills.remove(selectedBill);
-                        bills = updatedBills;
+                       userBills.remove(selectedBill);
                     } else {
                         System.out.println("Insufficient balance to pay the bill.");
                         System.out.println("----------------------------------");
@@ -66,27 +64,39 @@ public class BillPaymentService {
 
 
 
-    public static void checkBills(List<IBill> bills, String accNum) {
-        // Check bills associated with the user's account number
+    public static List<IBill> checkBills(List<IBill> bills, String accNum) {
+        List<IBill> userBills = new ArrayList<>();
+
+        // Filter bills associated with the provided account number
         for (IBill bill : bills) {
             if (bill.getAccountNumber().equals(accNum)) {
-                if (bill.isPaid()) {
-                    // Bill has already been paid
-                    System.out.println("You have already paid a bill with amount $" + bill.getAmount());
-                } else {
-                    // Bill is unpaid
-                    if (bill instanceof GasBill) {
-                        System.out.println("You have an unpaid Gas bill with amount $" + bill.getAmount());
-                    } else if (bill instanceof WaterBill) {
-                        System.out.println("You have an unpaid Water bill with amount $" + bill.getAmount());
-                    } else if (bill instanceof ElectricityBill) {
-                        System.out.println("You have an unpaid Electricity bill with amount $" + bill.getAmount());
-                    } else {
-                        System.out.println("You have an unpaid bill with amount $" + bill.getAmount());
-                    }
-                }
+                userBills.add(bill);
             }
         }
 
+        // Check bills associated with the user's account number
+        if (userBills.isEmpty()) {
+            System.out.println("No bills associated with the provided account number.");
+        } else {
+            System.out.println("Bills associated with your account:");
+            for (int i = 0; i < userBills.size(); i++) {
+                IBill bill = userBills.get(i);
+                String billDescription = "";
 
+                // Customize the bill description based on the bill type
+                if (bill instanceof GasBill) {
+                    billDescription = "Gas bill with amount $" + bill.getAmount();
+                } else if (bill instanceof WaterBill) {
+                    billDescription = "Water bill with amount $" + bill.getAmount();
+                } else if (bill instanceof ElectricityBill) {
+                    billDescription = "Electricity bill with amount $" + bill.getAmount();
+                } else {
+                    billDescription = "Bill with amount $" + bill.getAmount();
+                }
+
+                System.out.println((i + 1) + ". " + billDescription);
+            }
+        }
+
+        return userBills;
     }}

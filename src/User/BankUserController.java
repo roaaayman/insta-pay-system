@@ -42,6 +42,7 @@ public class BankUserController {
                 System.out.println("----------------------------------");
                 loadDetails();
 
+
                 System.out.println("----------------------------------");
 
                 boolean verified = bankv.verifyOTP(bankUser.getMobileNumber());
