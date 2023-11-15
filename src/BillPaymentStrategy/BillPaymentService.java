@@ -12,38 +12,50 @@ import java.util.Scanner;
 
 public class BillPaymentService {
 
-    public static void chooseAndPayBill(List<IBill> bills, double balance, String accnum, InstaPayUser instaPayUser) {
+    public static List<IBill> chooseAndPayBill(List<IBill> bills, double balance, String accnum, InstaPayUser instaPayUser) {
         Scanner scanner = new Scanner(System.in);
+        List<IBill> userBills = checkBills(bills, accnum);
 
-
-        // Display the bills associated with the user's account
+        // Display the unpaid bills associated with the user's account
         System.out.println("Bills associated with your account:");
-        List<IBill> userBills =checkBills(bills, accnum);
-        System.out.println("----------------------------------");
+        for (int i = 0; i < userBills.size(); i++) {
+            IBill bill = userBills.get(i);
+            String billDescription = "";
 
-        // Prompt the user to choose a bill
+            // Customize the bill description based on the bill type
+            if (bill instanceof GasBill) {
+                billDescription = "Gas bill with amount $" + bill.getAmount();
+            } else if (bill instanceof WaterBill) {
+                billDescription = "Water bill with amount $" + bill.getAmount();
+            } else if (bill instanceof ElectricityBill) {
+                billDescription = "Electricity bill with amount $" + bill.getAmount();
+            } else {
+                billDescription = "Bill with amount $" + bill.getAmount();
+            }
+
+            System.out.println((i + 1) + ". " + billDescription);
+        }
+
         System.out.print("Enter the number of the bill you want to pay (1, 2, 3, ...): ");
         int billNumber = scanner.nextInt();
-        System.out.println("----------------------------------");
 
-        // Ensure the entered bill number is valid
-        if (billNumber >= 1 && billNumber <= bills.size()) {
-            IBill selectedBill = bills.get(billNumber - 1);
+        if (billNumber >= 1 && billNumber <= userBills.size()) {
+            IBill selectedBill = userBills.get(billNumber - 1);
 
-            // Check if the bill is already paid
             if (!selectedBill.isPaid()) {
-                // Display the details of the selected bill
-
-                // Prompt the user to confirm the payment
                 System.out.print("Do you want to pay this bill? (yes/no): ");
                 String confirmation = scanner.next().toLowerCase();
 
                 if (confirmation.equals("yes")) {
                     if (balance >= selectedBill.getAmount()) {
-                        // Pay the bill
-                        selectedBill.payBill(instaPayUser);  // Pass the user as null, adjust the method if necessary
+                        selectedBill.payBill(instaPayUser);
+                        System.out.println("Deduction successful. Remaining balance: " + (balance - selectedBill.getAmount()));
                         System.out.println("----------------------------------");
-                       userBills.remove(selectedBill);
+
+                        // Remove the paid bill from the userBills list by index
+                        userBills.remove(selectedBill);
+
+                        return userBills; // Return the updated list after removing the paid bill
                     } else {
                         System.out.println("Insufficient balance to pay the bill.");
                         System.out.println("----------------------------------");
@@ -60,8 +72,9 @@ public class BillPaymentService {
             System.out.println("Invalid bill number. Please enter a valid number.");
             System.out.println("----------------------------------");
         }
-    }
 
+        return userBills; // Return the original list if no changes were made or payment canceled
+    }
 
 
     public static List<IBill> checkBills(List<IBill> bills, String accNum) {
@@ -99,4 +112,5 @@ public class BillPaymentService {
         }
 
         return userBills;
-    }}
+    }
+}

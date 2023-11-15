@@ -2,6 +2,9 @@ import Account.BankAccount;
 import Account.WalletAccount;
 import BankDummydata.Bank;
 import BankDummydata.DummyBankFactory;
+import Bill.ElectricityBill;
+import Bill.GasBill;
+import Bill.WaterBill;
 import BillData.BankUserBills;
 import BillData.WalletUserBills;
 import BillPaymentStrategy.BillPaymentService;
@@ -120,12 +123,44 @@ public class Main {
                                         case 4:
                                             System.out.println("Your current account balance is $ "+ bankUser.getBalance());
                                             break;
-                                        case 5:
-
+                                        case 5: // Choosing to pay bills
                                             List<IBill> bankbills = BankUserBills.initializeBills();
                                             List<IBill> userBills = BillPaymentService.checkBills(bankbills, bankUser.getBankAccount());
-                                            BillPaymentService.chooseAndPayBill(userBills,bankUser.getBalance(),bankUser.getBankAccount(),bankUser);
+                                            List<IBill> updatedBills = BillPaymentService.chooseAndPayBill(userBills, bankUser.getBalance(), bankUser.getBankAccount(), bankUser);
+
+                                            // Update the user's bills list
+                                            userBills.clear();
+                                            userBills.addAll(updatedBills);
+
+                                            // Display the updated bills list after payment
+                                            if (userBills.isEmpty()) {
+                                                System.out.println("No bills associated with your account.");
+                                            } else {
+                                                System.out.println("Updated Bills associated with your account:");
+                                                for (int i = 0; i < userBills.size(); i++) {
+                                                    IBill bill = userBills.get(i);
+                                                    String billType = ""; // Replace these with actual properties from your IBill interface
+                                                    double amount = 0.0;
+                                                    boolean isPaid = false;
+
+                                                    // Retrieve bill information
+                                                    if (bill instanceof GasBill) {
+                                                        billType = "Gas bill";
+                                                    } else if (bill instanceof WaterBill) {
+                                                        billType = "Water bill";
+                                                    } else if (bill instanceof ElectricityBill) {
+                                                        billType = "Electricity bill";
+                                                    }
+
+                                                    amount = bill.getAmount();
+                                                    isPaid = bill.isPaid();
+
+                                                    // Display bill details
+                                                    System.out.println((i + 1) + ". " + billType + " with amount $" + amount + ", Paid: " + isPaid);
+                                                }
+                                            }
                                             break;
+
                                         case 6:
 
                                             exitinner=true;
