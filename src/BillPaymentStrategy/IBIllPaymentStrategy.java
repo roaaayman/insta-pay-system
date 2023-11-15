@@ -1,9 +1,8 @@
 package BillPaymentStrategy;
 
-import Bill.IBill;
-import User.InstaPayUser;
+import User.User;
 
 public interface IBIllPaymentStrategy {
-    void payBill(IBill bill, InstaPayUser instaPayUser);
+    void payBill(IBill bill, User user);
 
 }

@@ -1,4 +1,5 @@
 package Transferral;
+
 import Account.IAccount;
 
 public interface ITransferStrategy {

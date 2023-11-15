@@ -1,8 +1,5 @@
 package BillData;
 
-import Bill.GasBill;
-import Bill.IBill;
-import Bill.WaterBill;
 import BillPaymentStrategy.*;
 
 import java.util.ArrayList;
@@ -23,5 +20,5 @@ public class WalletUserBills {
         bills.add(new GasBill("01253050169", 45.0,gas));
         bills.add(new WaterBill("01155690022", 20.0,water));
         return bills;
-}
+    }
 }
